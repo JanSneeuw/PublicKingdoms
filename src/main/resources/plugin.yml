@@ -1,0 +1,10 @@
+name: PublicKingdom
+version: ${project.version}
+version: 2.1.1
+main: net.zwet.publickingdom.PublicKingdom
+authors: [JanSneeuw]
+description: Rewrite van de kingdom plugin van FireKingdom
+commands:
+  K:
+    description: Basecommand
+

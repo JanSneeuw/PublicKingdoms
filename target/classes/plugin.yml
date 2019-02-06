@@ -1,0 +1,10 @@
+name: FireKD
+version: 2.1.1
+version: 2.1.1
+main: net.zwet.firekd.firekd
+authors: [JanSneeuw]
+description: Rewrite van de kingdom plugin van FireKingdom
+commands:
+  K:
+    description: Basecommand
+
