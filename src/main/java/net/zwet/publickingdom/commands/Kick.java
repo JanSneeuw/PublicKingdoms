@@ -34,7 +34,7 @@ public class Kick implements CommandExecutor {
         if (args.length == 1) {
             Player player = (Player) sender;
             Playerdata playerdata = new Playerdata(player);
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             Validator onlineValidator = new Validator().addValidation(new PlayerOnlineValidation(args[0]));
             boolean passOnOnline = onlineValidator.executeValidations();
             if (passOnOnline) {
@@ -42,7 +42,7 @@ public class Kick implements CommandExecutor {
                 Validator kickValidator = new Validator().addValidation(new InKingdomValidation(player)).addValidation(new InKingdomValidation(Bukkit.getPlayer(args[0]))).addValidation(new ShareKingdomValidation(player, Bukkit.getPlayer(args[0])))
                         .addValidation(new HasPermissionValidation(player, "k.kick")).addValidation(new IsHigherValidation(player).rank(new Playerdata(Bukkit.getPlayer(args[0])).getRank()));
                 boolean kickPasson = kickValidator.executeValidations();
-                if (kickPasson || player.hasPermission("firekingdom.staff")) {
+                if (kickPasson || player.hasPermission("publickingdom.staff")) {
                     //noinspection deprecation
                     Player kicked = Bukkit.getPlayer(args[0]);
                     Playerdata kickeddata = new Playerdata(kicked);
@@ -57,9 +57,9 @@ public class Kick implements CommandExecutor {
 
                     Scoreboard board = manager.getNewScoreboard();
                     if (kickeddata.boardIsOn()) {
-                        Objective objective = board.registerNewObjective("FireKingdom", "dummy");
+                        Objective objective = board.registerNewObjective("PublicKingdom", "dummy");
                         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                        objective.setDisplayName(ChatColor.WHITE + "   " + ChatColor.RED + ChatColor.BOLD + "Fire" + ChatColor.YELLOW + ChatColor.BOLD + "Kingdom" + ChatColor.RESET + ChatColor.WHITE + "   ");
+                        objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Scoreboard-Title")));
                         Score k = objective.getScore(ChatColor.GRAY + "§cKingdom:");
                         k.setScore(20);
                         Score kingdomR = objective.getScore(ChatColor.WHITE + "GEEN ");
@@ -82,8 +82,12 @@ public class Kick implements CommandExecutor {
                             }
                             board.registerNewTeam(kds.get("naam").toString());
                             board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                            board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
-                        }
+                            if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                            }
+                            if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                            }}
 
                     }
                     for (Player p : ScoreBoardCreateEvent.teamHashMap.keySet()) {
@@ -107,7 +111,7 @@ public class Kick implements CommandExecutor {
                     Location l = new Location(w, x, y, z, -92.6F, -0.3F); //Try location
                     kicked.teleport(l);
 
-                    player.sendMessage(fireprefix + " " + ChatColor.WHITE + kicked.getName() + " §7is gekicked van je kingdom!");
+                    player.sendMessage(prefix + " " + ChatColor.WHITE + kicked.getName() + " §7is gekicked van je kingdom!");
                     return true;
                 }
             } else if (onlineValidator.getErrormessage().contains("is not online!")) {
@@ -115,7 +119,7 @@ public class Kick implements CommandExecutor {
                         .addValidation(new ShareKingdomValidation(playerdata, new Playerdata(args[0]))).addValidation(new HasPermissionValidation(player, "k.kick"))
                         .addValidation(new IsHigherValidation(player, new Playerdata(args[0]).getRank()));
                 boolean pass = offlineKickValidator.executeValidations();
-                if (pass || player.hasPermission("firekingdom.staff")){
+                if (pass || player.hasPermission("publickingdom.staff")){
                     Playerdata kickeddata = null;
                     try {
                         kickeddata = new Playerdata(args[0]);
@@ -130,9 +134,9 @@ public class Kick implements CommandExecutor {
                         e.printStackTrace();
                     }
 
-                    player.sendMessage(fireprefix + " " + ChatColor.WHITE + kickeddata.getName() + " §7is gekicked van je kingdom!");
+                    player.sendMessage(prefix + " " + ChatColor.WHITE + kickeddata.getName() + " §7is gekicked van je kingdom!");
                 } else {
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + offlineKickValidator.getErrormessage());
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + offlineKickValidator.getErrormessage());
                 }
             }
         }

@@ -19,10 +19,10 @@ public class Home implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         if (sender instanceof Player && args.length == 1){
             Player player = (Player) sender;
-                Validator homeValidator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "firekingdom.home"))
+                Validator homeValidator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "publickingdom.home"))
                         .addValidation(new InKingdomValidation(player)).addValidation(new NotSpawningValidation(player)).addValidation(new HasCertainHome(player, args[0]));
                 Playerdata playerdata = null;
                 try {
@@ -32,20 +32,20 @@ public class Home implements CommandExecutor {
                 }
                 boolean passOn = homeValidator.executeValidations();
                 if (passOn) {
-                    player.sendMessage(fireprefix + ChatColor.GRAY + " Je wordt over 5 seconden naar je home geteleport!");
+                    player.sendMessage(prefix + ChatColor.GRAY + " Je wordt over 5 seconden naar je home geteleport!");
                     Playerdata finalPlayerdata = playerdata;
                     BukkitTask runnable = new BukkitRunnable() {
                             public void run() {
                                 if (Spawn.hspawner.containsKey(player)) {
                                     player.teleport(finalPlayerdata.getHome(args[0]));
                                     Spawn.hspawner.remove(player);
-                                    player.sendMessage(fireprefix + ChatColor.GRAY + " Je bent nu bij je home!");
+                                    player.sendMessage(prefix + ChatColor.GRAY + " Je bent nu bij je home!");
                                 }
                             }
                         }.runTaskLater(plugin, 100L);
                         Spawn.hspawner.put(player, runnable);
                 } else {
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + homeValidator.getErrormessage());
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + homeValidator.getErrormessage());
                 }
         }
         return true;

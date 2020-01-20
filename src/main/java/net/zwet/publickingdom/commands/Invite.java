@@ -51,17 +51,15 @@ public class Invite implements CommandExecutor {
                 YamlConfiguration hs = new YamlConfiguration();
                 File inviteddatafile = new File(plugin.getDataFolder() + File.separator + "players" + File.separator + invited.getUniqueId().toString() + ".yml");
                 inviteddata = YamlConfiguration.loadConfiguration(inviteddatafile);
-                String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-                String King = kingdom.getKing().getName();
+                String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
                 String Prefix = kingdom.getPrefix().replace("&", "§");
 
-                String koningnaam = kingdom.getKing().getName();
                 if (inviteddata.get("kingdom").equals(plugin.getConfig().get("Kingdomloos"))) {
                     if (playerdata.isInKingdom()) {
                         if (playerdata.hasPermission("k.invite")) {
                             int ledenaantal = kingdom.getPlayersAmount();
                             invites.add(inviteds + " " + kingdom.getName());
-                            invited.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je bent geinvite voor kingdom §f" + kingdom.getColoredName() + "§7!");
+                            invited.sendMessage(prefix + " " + ChatColor.GRAY + "Je bent geinvite voor kingdom §f" + kingdom.getColoredName() + "§7!");
                             Inventory inventory = Bukkit.createInventory(null, 36, kingdom.getColoredName() + " §7- " + ChatColor.GRAY + "Invite");
 
                             ItemStack Accept = new ItemStack(Material.EMERALD_BLOCK);
@@ -77,22 +75,28 @@ public class Invite implements CommandExecutor {
                             ItemStack info = new ItemStack(Material.PAPER);
                             ItemMeta infoMeta = info.getItemMeta();
                             infoMeta.setDisplayName(ChatColor.DARK_GRAY + "Kingdom info:");
-                            infoMeta.setLore(Arrays.asList("§7Prefix: " + Prefix, "§7Koning: §f" + koningnaam, "§7Leden: §f" + ledenaantal));
+                            if (kingdom.getKing() != null) {
+                                String koningnaam = kingdom.getKing().getName();
+                                infoMeta.setLore(Arrays.asList("§7Prefix: " + Prefix, "§7Koning: §f" + koningnaam, "§7Leden: §f" + ledenaantal));
+                            }else{
+                                infoMeta.setLore(Arrays.asList("§7Prefix: " + Prefix, "§7Koning: §fGEEN" , "§7Leden: §f" + ledenaantal));
+
+                            }
                             info.setItemMeta(infoMeta);
 
                             inventory.setItem(21, Accept);
                             inventory.setItem(23, Deny);
                             inventory.setItem(13, info);
                             invited.openInventory(inventory);
-                            player.sendMessage(fireprefix + ChatColor.GRAY + " Je hebt " + inviteds + " geinvite!");
+                            player.sendMessage(prefix + ChatColor.GRAY + " Je hebt " + inviteds + " geinvite!");
 
                             return true;
                         } else {
-                            sender.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je hebt niet de juiste permissions om dit te doen!");
+                            sender.sendMessage(prefix + " " + ChatColor.GRAY + "Je hebt niet de juiste permissions om dit te doen!");
                         }
                     }
                 } else {
-                    player.sendMessage(fireprefix + " " + ChatColor.WHITE + invited.getName() + " §7zit al in een kingdom!");
+                    player.sendMessage(prefix + " " + ChatColor.WHITE + invited.getName() + " §7zit al in een kingdom!");
                 }
                 return true;
             }

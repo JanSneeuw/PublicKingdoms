@@ -25,13 +25,13 @@ public class HertogdomDefine implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-            Validator hertogdomDefineValidator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "firekingdom.staff"))
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            Validator hertogdomDefineValidator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "publickingdom.staff"))
                     .addValidation(new KingdomExistsValidation(args[0]));
             boolean passOn = hertogdomDefineValidator.executeValidations();
             if (passOn) {
                 if (args.length == 2) {
-                    if (player.hasPermission("FireKingdom.staff")) {
+                    if (player.hasPermission("publickingdom.staff")) {
                         Playerdata PlayerData = new Playerdata(player);
                         Kingdom kingdom = null;
                         try {
@@ -45,7 +45,7 @@ public class HertogdomDefine implements CommandExecutor {
                             }
                         }
                     } else {
-                        player.sendMessage(fireprefix + " " + ChatColor.RED + "Je staat niet in een worldguard region!");
+                        player.sendMessage(prefix + " " + ChatColor.RED + "Je staat niet in een worldguard region!");
                     }
                 } else if (args.length == 3) {
                     Playerdata playerdata = new Playerdata(player);
@@ -55,7 +55,7 @@ public class HertogdomDefine implements CommandExecutor {
                     } catch (NoSuchKingdomException | NullPointerException e) {
                         Bukkit.getLogger().warning(args[0] + " bestaat niet! HertogdomDefine{54}");
                     }
-                    if (player.hasPermission("FireKingdom.staff")) {
+                    if (player.hasPermission("publickingdom.staff")) {
                         if (kingdom != null) {
                             if (kingdom.hertogdomExists(args[1])) {
                                 kingdom.defineHertogdom(args[1], args[2]);
@@ -64,7 +64,7 @@ public class HertogdomDefine implements CommandExecutor {
                     }
                 }
             }else{
-                player.sendMessage(fireprefix + " " + ChatColor.GRAY + hertogdomDefineValidator.getErrormessage());
+                player.sendMessage(prefix + " " + ChatColor.GRAY + hertogdomDefineValidator.getErrormessage());
             }
         }
         return true;

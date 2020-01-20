@@ -1,11 +1,11 @@
 package net.zwet.publickingdom.methods;
 
+import net.minecraft.server.v1_13_R2.IChatBaseComponent;
+import net.minecraft.server.v1_13_R2.PacketPlayOutChat;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 
 
 public class TitleMessage {
@@ -13,7 +13,7 @@ public class TitleMessage {
     private PacketPlayOutChat packet;
 
     public TitleMessage(String text) {
-        PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + text + "\"}"), (byte) 2);
+        PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + text + "\"}"));
         this.packet = packet;
     }
 

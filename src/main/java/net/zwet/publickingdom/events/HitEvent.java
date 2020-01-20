@@ -1,7 +1,13 @@
 package net.zwet.publickingdom.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.objects.Kingdom;
 import net.zwet.publickingdom.objects.Playerdata;
@@ -33,9 +39,9 @@ public class HitEvent implements Listener {
             Playerdata damagerdata = new Playerdata(damager);
             Playerdata damageddata = new Playerdata(damaged);
             Kingdom kingdom = new Kingdom(damaged);
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             if (damageddata.isInKingdom()) {
-                cancel(event, damager, damaged, damagerdata, damageddata, kingdom, fireprefix);
+                cancel(event, damager, damaged, damagerdata, damageddata, kingdom, prefix);
 
             }
         } else if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player) {
@@ -47,9 +53,9 @@ public class HitEvent implements Listener {
                 Playerdata damagerdata = new Playerdata(damager);
                 Playerdata damageddata = new Playerdata(damaged);
                 Kingdom kingdom = new Kingdom(damaged);
-                String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+                String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
                 if (damageddata.isInKingdom()) {
-                    cancel(event, damager, damaged, damagerdata, damageddata, kingdom, fireprefix);
+                    cancel(event, damager, damaged, damagerdata, damageddata, kingdom, prefix);
                 }
             } else if (event.getDamager() instanceof FishHook && event.getEntity() instanceof Player) {
                 FishHook fishHook = (FishHook) event.getDamager();
@@ -60,21 +66,25 @@ public class HitEvent implements Listener {
                     Playerdata damagerdata = new Playerdata(damager);
                     Playerdata damageddata = new Playerdata(damaged);
                     Kingdom kingdom = new Kingdom(damaged);
-                    String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+                    String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
                     Validator hitValidator = new Validator().addValidation(new InKingdomValidation(damaged)).addValidation(new InRegionValidation(damaged, damaged.getWorld()))
                             .addValidation(new HasRegionValidation(kingdom).region(region)).addValidation(new KingdomHasFlagValidation(kingdom, "enemy-hit"))
                                 .addValidation(new KingdomHasRegionValidation(kingdom)).addValidation(new KingdomHasFlagValidation(kingdom, "enemy-hit"));
                     if (damageddata.isInKingdom()) {
-                        if (WGBukkit.getRegionManager(damaged.getWorld()).getApplicableRegions(damaged.getLocation()).size() != 0) {
-                            for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(damager.getWorld()).getApplicableRegions(damaged.getLocation())) {
+                        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(damaged);
+                        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                        RegionQuery query = regionContainer.createQuery();
+                        if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                            for (ProtectedRegion kingdomRegion : set) {
                                 this.region = kingdomRegion;
-                                if (kingdomRegion.getId() != null && kingdom.getRegion().getId() != null) {
+                                if (kingdomRegion.getId() != null && kingdom.getRegion() != null) {
                                     if (kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) {
                                         if (kingdom.hasFlag("enemy-hit")) {
                                             if (damageddata.getKingdomName() != null && damagerdata.getKingdomName() != null) {
-                                                if (!damageddata.getKingdomName().equals(damagerdata.getKingdomName()) && !damager.hasPermission("FireKingdom.Staff")) {
+                                                if (!damageddata.getKingdomName().equals(damagerdata.getKingdomName()) && !damager.hasPermission("publickingdom.staff")) {
                                                     event.setCancelled(true);
-                                                    damager.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je kan niet iemand slaan in zijn eigen border!");
+                                                    damager.sendMessage(prefix + " " + ChatColor.GRAY + "Je kan niet iemand slaan in zijn eigen border!");
                                                 }
                                             }
                                         }
@@ -88,15 +98,19 @@ public class HitEvent implements Listener {
         }
     }
 
-    private void cancel(EntityDamageByEntityEvent event, Player damager, Player damaged, Playerdata damagerdata, Playerdata damageddata, Kingdom kingdom, String fireprefix) {
-        if (WGBukkit.getRegionManager(damaged.getWorld()).getApplicableRegions(damaged.getLocation()).size() != 0) {
-            for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(damager.getWorld()).getApplicableRegions(damaged.getLocation())) {
+    private void cancel(EntityDamageByEntityEvent event, Player damager, Player damaged, Playerdata damagerdata, Playerdata damageddata, Kingdom kingdom, String prefix) {
+        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(damaged);
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionQuery query = regionContainer.createQuery();
+        if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+            for (ProtectedRegion kingdomRegion : set) {
                 assert kingdomRegion != null;
                 if (kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) {
                     if (kingdom.hasFlag("enemy-hit")) {
-                        if (!damageddata.getKingdomName().equals(damagerdata.getKingdomName()) && !damager.hasPermission("FireKingdom.Staff")) {
+                        if (!damageddata.getKingdomName().equals(damagerdata.getKingdomName()) && !damager.hasPermission("publickingdom.Staff")) {
                             event.setCancelled(true);
-                            damager.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je kan niet iemand slaan in zijn eigen border!");
+                            damager.sendMessage(prefix + " " + ChatColor.GRAY + "Je kan niet iemand slaan in zijn eigen border!");
                         }
                     }
                 }

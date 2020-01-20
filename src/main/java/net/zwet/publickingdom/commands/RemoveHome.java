@@ -20,15 +20,15 @@ public class RemoveHome implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             Player player = (Player) sender;
-            Validator removeValidator = new Validator().addValidation(new ArgsEqualsLengthValidation(1, args.length)).addValidation(new HasBukkitPermissionValidation(player, "firekingdom.home")).addValidation(new HasCertainHome(player, args[0]));
+            Validator removeValidator = new Validator().addValidation(new ArgsEqualsLengthValidation(1, args.length)).addValidation(new HasBukkitPermissionValidation(player, "publickingdom.home")).addValidation(new HasCertainHome(player, args[0]));
             boolean passOn = removeValidator.executeValidations();
             if (passOn){
                 Playerdata playerdata = new Playerdata(player);
                 try {
                     playerdata.removeHome(args[0]);
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je hebt de home " + args[0] + " verwijderd!");
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Je hebt de home " + args[0] + " verwijderd!");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

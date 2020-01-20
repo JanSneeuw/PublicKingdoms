@@ -1,4 +1,6 @@
 Kingdomloos: '&7Kingdomloos'
-Message-Prefix: '&f[&c&lFire&e&lNetwork&r&f]'
+Message-Prefix: '&cTEST'
 Kingdom-World: world
 kingdomloos-spawn: world
+Scoreboard-Title: '&5Public&7Kingdom'
+Help-Board-Header: '&6-------&5Public&7Kingdom&6-------'

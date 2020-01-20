@@ -46,7 +46,7 @@ public class ChatEvent implements Listener {
         if (playerdata.isInKingdom()) {
             Kingdom kingdom = new Kingdom(player);
             if (event.getMessage().charAt(0) == '!') {
-                if (!player.hasPermission("firekingdom.staffcolor")) {
+                if (!player.hasPermission("publickingdom.staffcolor")) {
                     event.setFormat(ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "]" + "[" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "] " + ChatColor.RESET + player.getDisplayName() + PermissionsEx.getPermissionManager().getGroup(p.getName()).getPrefix()
                             + ChatColor.WHITE + ":" + ChatColor.GRAY + " " + event.getMessage().replace("!", "").replace("&", "§").replace("%", "‰"));
                 }else{
@@ -89,7 +89,7 @@ public class ChatEvent implements Listener {
             }
 
         } else if (!playerdata.isInKingdom()) {
-            if (!player.hasPermission("firekingdom.staffcolor")){
+            if (!player.hasPermission("kingdom.staffcolor")){
                 event.setFormat(ChatColor.WHITE + "§7[§2Kingdomloos" + "§7] " + ChatColor.RESET + event.getPlayer().getDisplayName() + PermissionsEx.getPermissionManager().getGroup(p.getName()).getPrefix() + ChatColor.WHITE + ":" + ChatColor.GRAY + " " + event.getMessage().replace("%", "‰").replace("!", ""));
             }else {
                 event.setFormat(ChatColor.WHITE + "§7[§2Kingdomloos" + "§7] " + ChatColor.RESET + event.getPlayer().getDisplayName() + PermissionsEx.getPermissionManager().getGroup(p.getName()).getPrefix() + ChatColor.WHITE + ":" + ChatColor.WHITE + " " + event.getMessage().replace("%", "‰").replace("!", ""));

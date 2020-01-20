@@ -1,7 +1,13 @@
 package net.zwet.publickingdom.objects;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.Exceptions.NoSuchKingdomException;
 import org.bukkit.*;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -58,7 +64,8 @@ public class Kingdom {
         return kingdomdata.getString("Default-Rank");
     }
     public ProtectedRegion getRegion(){
-        ProtectedRegion region = WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(kingdomdata.getString("region"));
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        ProtectedRegion region = regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World")))).getRegion(kingdomdata.getString("region"));
         return region;
     }
     public List<String> getAllies(){
@@ -199,21 +206,27 @@ public class Kingdom {
         }
     }
     public void setRegion(Player p){
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-        for (ProtectedRegion region : WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(p.getLocation())){
-            kingdomdata.set("region", region.getId());
-            try {
-                kingdomdata.save(kingdomdatafile);
-            } catch (IOException e) {
-                Bukkit.getLogger().warning("Kan " + getName() + "'s kingdomdatafile niet opslaan na veranderen van region!");
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(p);
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionQuery query = regionContainer.createQuery();
+        if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+            for (ProtectedRegion region : set) {
+                kingdomdata.set("region", region.getId());
+                try {
+                    kingdomdata.save(kingdomdatafile);
+                } catch (IOException e) {
+                    Bukkit.getLogger().warning("Kan " + getName() + "'s kingdomdatafile niet opslaan na veranderen van region!");
+                }
+                p.sendMessage(prefix + " " + ChatColor.BLUE + region.getId() + " is nu de region van " + getName());
+
             }
-            p.sendMessage(fireprefix + " " + ChatColor.BLUE + region.getId() + " is nu de region van " + getName());
-
         }
-
     }
     public void setRegion(String region) {
-        if (WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(region) != null) {
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        if (regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("kingdom-world")))).getRegion(region) != null) {
             kingdomdata.set("region", region);
             try {
                 kingdomdata.save(kingdomdatafile);
@@ -296,14 +309,22 @@ public class Kingdom {
         }
     }
     public Playerdata getKing(){
-        return new Playerdata(UUID.fromString(kingdomdata.getString("King")));
+        if (!kingdomdata.getString("King").equalsIgnoreCase("NONE")) {
+            return new Playerdata(UUID.fromString(kingdomdata.getString("King")));
+        }else{
+            return null;
+        }
     }
     public ItemStack getKingItem(){
         List<String> kinglore = new ArrayList<>();
         ItemStack king = new ItemStack(Material.GOLD_BLOCK);
         ItemMeta kingmeta = king.getItemMeta();
         kingmeta.setDisplayName(ChatColor.GRAY + "Koning: ");
-        kinglore.add(ChatColor.BLUE + getKing().getName());
+        if (getKing() != null) {
+            kinglore.add(ChatColor.BLUE + getKing().getName());
+        }else{
+            kinglore.add(ChatColor.BLUE + "GEEN");
+        }
         kingmeta.setLore(kinglore);
         king.setItemMeta(kingmeta);
         return king;
@@ -379,7 +400,11 @@ public class Kingdom {
         return kingdomdata.getStringList("flags");
     }
     public boolean hasFlag(String flag){
-        return getFlags().contains(flag);
+        if (getFlags() != null) {
+            return getFlags().contains(flag);
+        }else{
+            return false;
+        }
     }
     public String getColoredRank(String rank){
         return ChatColor.translateAlternateColorCodes('&', kingdomdata.getString("ranks." + rank + ".prefix"));
@@ -399,7 +424,8 @@ public class Kingdom {
         }
     }
     public void defineHertogdom(String naam, String region){
-        if (WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(region) != null) {
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        if (regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World")))).getRegion(region) != null) {
             kingdomdata.set("Hertogdom."+ naam + ".Region", region);
             try {
                 kingdomdata.save(kingdomdatafile);
@@ -411,20 +437,28 @@ public class Kingdom {
         }
     }
     public void defineHertogdom(String naam, Player p){
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-        for (ProtectedRegion region : WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(p.getLocation())){
-            kingdomdata.set("Hertogdom." + naam + ".Region", region.getId());
-            try {
-                kingdomdata.save(kingdomdatafile);
-            } catch (IOException e) {
-                Bukkit.getLogger().warning("Kan " + getName() + "'s kingdomdatafile niet opslaan na veranderen van region!");
-            }
-            p.sendMessage(fireprefix + " " + ChatColor.BLUE + region.getId() + " is nu de region van " + getName());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(p);
+        RegionQuery query = regionContainer.createQuery();
+        if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+            for (ProtectedRegion region : set) {
+                kingdomdata.set("Hertogdom." + naam + ".Region", region.getId());
+                try {
+                    kingdomdata.save(kingdomdatafile);
+                } catch (IOException e) {
+                    Bukkit.getLogger().warning("Kan " + getName() + "'s kingdomdatafile niet opslaan na veranderen van region!");
+                }
+                p.sendMessage(prefix + " " + ChatColor.BLUE + region.getId() + " is nu de region van " + getName());
 
+            }
         }
     }
     public ProtectedRegion getHertogdomRegion(String naam){
-        return WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(kingdomdata.getString("Hertogdom."+ naam + ".Region"));
+        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+
+        return regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World")))).getRegion(kingdomdata.getString("Hertogdom."+ naam + ".Region"));
     }
     public boolean hasHertogdom(){
         return kingdomdata.get("Hertogdom") != null;
@@ -455,8 +489,9 @@ public class Kingdom {
         boolean answer = false;
         if (hasHertogdom()) {
             for (String hertogdom : kingdomdata.getConfigurationSection("Hertogdom").getKeys(false)) {
-                if (WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(kingdomdata.getString("Hertogdom." + hertogdom + ".Region")) != null) {
-                    ProtectedRegion protectedRegion = WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getRegion(kingdomdata.getString("Hertogdom." + hertogdom + ".Region"));
+                RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                if (regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World")))).getRegion(kingdomdata.getString("Hertogdom." + hertogdom + ".Region")) != null) {
+                    ProtectedRegion protectedRegion = regionContainer.get(BukkitAdapter.adapt(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World")))).getRegion(kingdomdata.getString("Hertogdom." + hertogdom + ".Region"));
                     assert protectedRegion != null;
                     if (protectedRegion.getId().equalsIgnoreCase(region.getId())) {
                         answer = true;

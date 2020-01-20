@@ -1,7 +1,12 @@
 package net.zwet.publickingdom.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.Exceptions.NoSuchKingdomException;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.objects.Kingdom;
@@ -26,11 +31,15 @@ public class BPEvent implements Listener {
         Player player = event.getPlayer();
         Playerdata playerdata = new Playerdata(player);
         Kingdom kingdom = new Kingdom(player);
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
 
         if (player instanceof Player) {
-            if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).size() != 0) {
-                for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(event.getBlockPlaced().getLocation())) {
+            LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = regionContainer.createQuery();
+            if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                for (ProtectedRegion kingdomRegion : set) {
                     String hr = (kingdomRegion.getId().charAt(0) + "").toUpperCase() + kingdomRegion.getId().substring(1);
                     Kingdom buildkingdom = null;
                     try {
@@ -43,10 +52,10 @@ public class BPEvent implements Listener {
                             if (buildkingdom.getRegion().getId() != null) {
                                 if (playerdata.getKingdomName() != null) {
                                     if (buildkingdom.getName() != null) {
-                                        if ((kingdomRegion.getId().equalsIgnoreCase(buildkingdom.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) && !playerdata.getKingdomName().equals(buildkingdom.getName()) && !player.hasPermission("FireKingdom.Staff")) {
+                                        if ((kingdomRegion.getId().equalsIgnoreCase(buildkingdom.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) && !playerdata.getKingdomName().equals(buildkingdom.getName()) && !player.hasPermission("publickingdom.Staff")) {
                                             if (buildkingdom.hasFlag("enemy-build")) {
                                                 event.setCancelled(true);
-                                                player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je mag niet in andermans border bouwen!");
+                                                player.sendMessage(prefix + " " + ChatColor.GRAY + "Je mag niet in andermans border bouwen!");
                                             }
                                         }
                                     }
@@ -63,27 +72,32 @@ public class BPEvent implements Listener {
         Player player = event.getPlayer();
         Playerdata playerdata = new Playerdata(player);
         Kingdom kingdom = new Kingdom(player);
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
 
         if (player instanceof Player) {
-            for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(event.getBlockClicked().getLocation())) {
-                String hr = (kingdomRegion.getId().charAt(0) + "").toUpperCase() + kingdomRegion.getId().substring(1);
-                Kingdom buildkingdomdata = null;
-                try {
-                    buildkingdomdata = new Kingdom(hr);
-                } catch (NoSuchKingdomException | NullPointerException e) {
-                    Bukkit.getLogger().warning(hr + " bestaat niet! {BPEvent: 75}");
-                }
-                if (buildkingdomdata != null) {
-                    if ((kingdomRegion.getId().equalsIgnoreCase(buildkingdomdata.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) && !playerdata.getKingdomName().equals(buildkingdomdata.getName())  && !player.hasPermission("FireKingdom.Staff")) {
-                        if (buildkingdomdata.hasFlag("enemy-build")) {
-                            event.setCancelled(true);
-                            player.sendMessage(fireprefix + " " + ChatColor.GRAY+ "Je mag niet in andermans border bouwen!");
+            LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = regionContainer.createQuery();
+            if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                for (ProtectedRegion kingdomRegion : set) {
+                    String hr = (kingdomRegion.getId().charAt(0) + "").toUpperCase() + kingdomRegion.getId().substring(1);
+                    Kingdom buildkingdomdata = null;
+                    try {
+                        buildkingdomdata = new Kingdom(hr);
+                    } catch (NoSuchKingdomException | NullPointerException e) {
+                        Bukkit.getLogger().warning(hr + " bestaat niet! {BPEvent: 75}");
+                    }
+                    if (buildkingdomdata != null) {
+                        if ((kingdomRegion.getId().equalsIgnoreCase(buildkingdomdata.getRegion().getId()) || kingdom.hasRegion(kingdomRegion)) && !playerdata.getKingdomName().equals(buildkingdomdata.getName()) && !player.hasPermission("publickingdom.Staff")) {
+                            if (buildkingdomdata.hasFlag("enemy-build")) {
+                                event.setCancelled(true);
+                                player.sendMessage(prefix + " " + ChatColor.GRAY + "Je mag niet in andermans border bouwen!");
+                            }
                         }
                     }
                 }
             }
-
         }
     }
 }

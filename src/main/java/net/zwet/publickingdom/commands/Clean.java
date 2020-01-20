@@ -18,7 +18,7 @@ public class Clean implements CommandExecutor {
         if (args.length == 1){
             if (sender instanceof Player){
                 Player player = (Player) sender;
-                if (player.hasPermission("firekingdom.staff")){
+                if (player.hasPermission("publickingdom.staff")){
                     Kingdom kingdom = null;
                     try{
                         kingdom = new Kingdom(args[0]);

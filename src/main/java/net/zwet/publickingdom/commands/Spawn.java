@@ -25,24 +25,24 @@ public class Spawn implements CommandExecutor {
         if (args.length == 0) {
             Player player = (Player) sender;
             Playerdata playerdata = new Playerdata(player);
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             if (playerdata.isInKingdom()) {
                 if (!hspawner.containsKey(player)) {
                     Kingdom kingdom = new Kingdom(player);
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je wordt over§f 5 seconden §7naar je kingdom spawn geteleport!");
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Je wordt over§f 5 seconden §7naar je kingdom spawn geteleport!");
                     BukkitTask runnable = new BukkitRunnable() {
                         @Override
                         public void run() {
                             if (hspawner.containsKey(player)) {
                                 player.teleport(kingdom.getSpawn());
                                 hspawner.remove(player);
-                                player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je bent nu bij je kingdom spawn!");
+                                player.sendMessage(prefix + " " + ChatColor.GRAY + "Je bent nu bij je kingdom spawn!");
                             }
                         }
                     }.runTaskLater(plugin, 100L);
                     hspawner.put(player, runnable);
                 }else{
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je wordt al geteleport naar je kingdom spawn!");
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Je wordt al geteleport naar je kingdom spawn!");
                 }
             }
         }

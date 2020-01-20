@@ -30,7 +30,7 @@ public class List implements CommandExecutor {
         YamlConfiguration kds = new YamlConfiguration();
         YamlConfiguration pls = new YamlConfiguration();
         Player player = (Player) sender;
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
 
         StringBuilder kingdomlijst = new StringBuilder();
         for (int i = 0; i < files.length; i++) {
@@ -39,11 +39,11 @@ public class List implements CommandExecutor {
         String lijst = kingdomlijst.toString().trim();
 
         if (player instanceof Player) {
-            player.sendMessage(fireprefix + ChatColor.WHITE + lijst.replace(".yml", ","));
+            player.sendMessage(prefix + ChatColor.WHITE + lijst.replace(".yml", ","));
         }
         if (Bukkit.getOnlinePlayers().size() == 1) {
 
-            player.sendMessage(fireprefix + "§7Er is momenteel maar §f1 §7speler online: ");
+            player.sendMessage(prefix + "§7Er is momenteel maar §f1 §7speler online: ");
             StringBuilder playerlijst = new StringBuilder();
             if (kingdomFiles != null) {
                 for (File kingdoms : kingdomFiles) {
@@ -83,7 +83,7 @@ public class List implements CommandExecutor {
 
         if (Bukkit.getOnlinePlayers().size() > 1) {
             StringBuilder playerlijst = new StringBuilder();
-            player.sendMessage(fireprefix + "Er zijn momenteel §f" + Bukkit.getOnlinePlayers().size() + "§7 spelers online: ");
+            player.sendMessage(prefix + "Er zijn momenteel §f" + Bukkit.getOnlinePlayers().size() + "§7 spelers online: ");
             if (kingdomFiles != null) {
                 for (File kingdoms : kingdomFiles) {
                     try {

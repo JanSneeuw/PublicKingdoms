@@ -1,8 +1,13 @@
 package net.zwet.publickingdom.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.objects.Kingdom;
 import net.zwet.publickingdom.objects.Playerdata;
@@ -48,9 +53,9 @@ public class ScoreBoardCreateEvent implements Listener {
 
             Scoreboard board = manager.getNewScoreboard();
             if (playerdata.boardIsOn()) {
-                Objective objective = board.registerNewObjective("FireKingdom", "dummy");
+                Objective objective = board.registerNewObjective("PublicKingdom", "dummy", "PublicKingdom");
                 objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                objective.setDisplayName(ChatColor.WHITE + "   " + ChatColor.RED + ChatColor.BOLD + "Fire" + ChatColor.YELLOW + ChatColor.BOLD + "Kingdom" + ChatColor.RESET + ChatColor.WHITE + "   ");
+                objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Scoreboard-Title")));
                 Score kingdoms = objective.getScore(ChatColor.RED + "Kingdom:");
                 kingdoms.setScore(20);
                 if (!playerdata.isInKingdom()) {
@@ -75,23 +80,34 @@ public class ScoreBoardCreateEvent implements Listener {
                     blankSpot2.setScore(15);
                     Score spot = objective.getScore(ChatColor.RED + "Locatie:");
                     spot.setScore(11);
+                    LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                    RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                    RegionQuery query = regionContainer.createQuery();
 
-                    if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).getRegions().size() == 0) {
+                    if (query.getApplicableRegions(lplayer.getLocation()).size() == 0) {
                         Score locResult = objective.getScore(ChatColor.WHITE + "???");
                         locResult.setScore(10);
 
                     } else {
-                        for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
-                            Score spotResult = objective.getScore(ChatColor.WHITE + kingdomRegion.getId().replaceAll("new-rhean", "§fNew-Rhean").replaceAll("katakinos", "§fKatakinos").replaceAll("spawn", "§fSpawn").replaceAll("ashanti", "§fAshanti").replaceAll("kayantos", "§fKayantos").replaceAll("tyros", "§fTyros").replaceAll("wellcliff", "§fWellcliff").replaceAll("ziladia", "§fZiladia"));
+                        ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                        for (ProtectedRegion kingdomRegion : set) {
+                            Score spotResult = objective.getScore(ChatColor.WHITE + kingdomRegion.getId());
                             spotResult.setScore(10);
                         }
                     }
-                    if (kingdom.getKing().exists()) {
+                    if (kingdom.getKing() != null) {
                         Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
                         blankSpot3.setScore(12);
                         Score king = objective.getScore(ChatColor.RED + "Koning:");
                         king.setScore(14);
                         Score kingResult = objective.getScore(ChatColor.WHITE + kingdom.getKing().getName());
+                        kingResult.setScore(13);
+                    }else{
+                        Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
+                        blankSpot3.setScore(12);
+                        Score king = objective.getScore(ChatColor.RED + "Koning:");
+                        king.setScore(14);
+                        Score kingResult = objective.getScore("GEEN");
                         kingResult.setScore(13);
                     }
                 }
@@ -105,9 +121,16 @@ public class ScoreBoardCreateEvent implements Listener {
                     } catch (InvalidConfigurationException e) {
                         Bukkit.getLogger().warning("Kan kingdom lijst niet laden!");
                     }
-                    board.registerNewTeam(kds.get("naam").toString());
+                    if (kds.get("naam") != null && board.getTeam(kds.get("naam").toString()) == null) {
+                        board.registerNewTeam(kds.get("naam").toString());
+                    }
                     board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                    board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
+                    if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                        board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                    }
+                    if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                        board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                    }
                 }
 
             }
@@ -142,15 +165,16 @@ public class ScoreBoardCreateEvent implements Listener {
             File[] kdfiles = new File(plugin.getDataFolder() + File.separator + "kingdoms").listFiles();
             YamlConfiguration kds = new YamlConfiguration();
             Scoreboard board = manager.getNewScoreboard();
-            Objective objective = board.registerNewObjective("FireKingdom", "dummy");
+            Objective objective = board.registerNewObjective("PublicKingdom", "dummy", "PublicKingdom");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName(ChatColor.WHITE + "   " + ChatColor.RED + ChatColor.BOLD + "Fire" + ChatColor.YELLOW + ChatColor.BOLD + "Kingdom" + ChatColor.RESET + ChatColor.WHITE + "   ");
+            objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Scoreboard-Title")));
             if (playerdata.isInKingdom()) {
                 if (event.getTo().getBlockX() != event.getFrom().getBlockX() || event.getTo().getBlockY() != event.getFrom().getBlockY() || event.getTo().getBlockZ() != event.getFrom().getBlockZ()) {
                     Location from = event.getFrom();
                     Location to = event.getTo();
-                    ApplicableRegionSet regions = WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(to);
-                    if (regions.size() == 0 && regionHashMap.get(player) != null) {
+                    RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                    RegionQuery query = regionContainer.createQuery();
+                    if (query.getApplicableRegions(BukkitAdapter.adapt(to)).size() == 0 && regionHashMap.get(player) != null) {
                         regionHashMap.remove(player);
                         if (playerdata.boardIsOn()) {
                             Score kingdoms = objective.getScore(ChatColor.RED + "Kingdom:");
@@ -170,16 +194,25 @@ public class ScoreBoardCreateEvent implements Listener {
                             Score spotR = objective.getScore(ChatColor.WHITE + "???");
                             spotR.setScore(10);
                             Kingdom kingdom = new Kingdom(player);
-                            if (kingdom.getKing().exists()) {
-                                Playerdata kingdata = kingdom.getKing();
-                                if (kingdata.exists()) {
-                                    Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
-                                    blankSpot3.setScore(12);
-                                    Score king = objective.getScore(ChatColor.RED + "Koning:");
-                                    king.setScore(14);
-                                    Score kingResult = objective.getScore(ChatColor.WHITE + kingdata.getName());
-                                    kingResult.setScore(13);
+                            if (kingdom.getKing() != null) {
+                                if (kingdom.getKing().exists()) {
+                                    Playerdata kingdata = kingdom.getKing();
+                                    if (kingdata.exists()) {
+                                        Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
+                                        blankSpot3.setScore(12);
+                                        Score king = objective.getScore(ChatColor.RED + "Koning:");
+                                        king.setScore(14);
+                                        Score kingResult = objective.getScore(ChatColor.WHITE + kingdata.getName());
+                                        kingResult.setScore(13);
+                                    }
                                 }
+                            }else{
+                                Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
+                                blankSpot3.setScore(12);
+                                Score king = objective.getScore(ChatColor.RED + "Koning:");
+                                king.setScore(14);
+                                Score kingResult = objective.getScore(ChatColor.WHITE + "GEEN");
+                                kingResult.setScore(13);
                             }
                         }
                         if (kdfiles != null) {
@@ -189,9 +222,16 @@ public class ScoreBoardCreateEvent implements Listener {
                                 } catch (IOException | InvalidConfigurationException e) {
                                     Bukkit.getLogger().warning("Kan kingdom lijst niet laden!");
                                 }
-                                board.registerNewTeam(kds.get("naam").toString());
+                                if (kds.get("naam") != null && board.getTeam(kds.get("naam").toString()) == null) {
+                                    board.registerNewTeam(kds.get("naam").toString());
+                                }
                                 board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                                board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
+                                if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                    board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                                }
+                                if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                    board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                                }
                             }
                             if (playerdata.isInKingdom()) {
                                 board.getTeam(playerdata.getKingdomName()).addEntry(player.getName());
@@ -206,8 +246,9 @@ public class ScoreBoardCreateEvent implements Listener {
 
                         player.setScoreboard(board);
                         scoreboardMap.put(player, board);
-                    } else if (regions.size() != 0 && regionHashMap.get(player) == null) {
-                        for (ProtectedRegion region : regions) {
+                    } else if (query.getApplicableRegions(BukkitAdapter.adapt(to)).size() != 0 && regionHashMap.get(player) == null) {
+                        ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(to));
+                        for (ProtectedRegion region : set) {
                             regionHashMap.put(player, region);
                             if (playerdata.boardIsOn()) {
                                 Score kingdoms = objective.getScore(ChatColor.RED + "Kingdom:");
@@ -228,13 +269,22 @@ public class ScoreBoardCreateEvent implements Listener {
                                 spotR.setScore(10);
                                 Kingdom kingdom = new Kingdom(player);
                                 if (kingdom.exists()) {
-                                    Playerdata kingdata = kingdom.getKing();
-                                    if (kingdata.exists()) {
+                                    if (kingdom.getKing() != null) {
+                                        Playerdata kingdata = kingdom.getKing();
+                                        if (kingdata.exists()) {
+                                            Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
+                                            blankSpot3.setScore(12);
+                                            Score king = objective.getScore(ChatColor.RED + "Koning:");
+                                            king.setScore(14);
+                                            Score kingResult = objective.getScore(ChatColor.WHITE + kingdata.getName());
+                                            kingResult.setScore(13);
+                                        }
+                                    }else{
                                         Score blankSpot3 = objective.getScore(ChatColor.YELLOW + "     ");
                                         blankSpot3.setScore(12);
                                         Score king = objective.getScore(ChatColor.RED + "Koning:");
                                         king.setScore(14);
-                                        Score kingResult = objective.getScore(ChatColor.WHITE + kingdata.getName());
+                                        Score kingResult = objective.getScore("GEEN");
                                         kingResult.setScore(13);
                                     }
                                 }
@@ -250,7 +300,12 @@ public class ScoreBoardCreateEvent implements Listener {
                                     }
                                     board.registerNewTeam(kds.get("naam").toString());
                                     board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                                    board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
+                                    if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                        board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                                    }
+                                    if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                        board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                                    }
                                 }
                                 if (playerdata.isInKingdom()) {
                                     board.getTeam(playerdata.getKingdomName()).addEntry(player.getName());
@@ -265,8 +320,9 @@ public class ScoreBoardCreateEvent implements Listener {
                             player.setScoreboard(board);
                             scoreboardMap.put(player, board);
                         }
-                    } else if (regions.size() != 0 && regionHashMap.get(player) != null) {
-                        for (ProtectedRegion region : regions) {
+                    } else if (query.getApplicableRegions(BukkitAdapter.adapt(to)).size() != 0 && regionHashMap.get(player) != null) {
+                        ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(to));
+                        for (ProtectedRegion region : set) {
                             if (!regionHashMap.get(player).equals(region)) {
                                 regionHashMap.put(player, region);
                                 if (playerdata.boardIsOn()) {
@@ -311,8 +367,12 @@ public class ScoreBoardCreateEvent implements Listener {
                                         if (!board.getTeams().contains(board.getTeam(kds.getString("naam")))) {
                                             board.registerNewTeam(kds.get("naam").toString());
                                             board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                                            board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
-                                        }
+                                            if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                                board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                                            }
+                                            if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                                board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                                            }}
                                     }
                                     if (playerdata.isInKingdom()) {
                                         board.getTeam(playerdata.getKingdomName()).addEntry(player.getName());

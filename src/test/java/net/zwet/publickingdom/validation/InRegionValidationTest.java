@@ -1,6 +1,5 @@
 package net.zwet.publickingdom.validation;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import org.bukkit.Location;

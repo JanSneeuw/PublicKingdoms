@@ -20,8 +20,8 @@ public class ListHomes implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-            Validator validator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "firekingdom.home")).addValidation(new HasHomeValidation(player));
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            Validator validator = new Validator().addValidation(new HasBukkitPermissionValidation(player, "publickingdom.home")).addValidation(new HasHomeValidation(player));
             boolean passOn = validator.executeValidations();
             if (passOn){
                 Playerdata playerdata = new Playerdata(player);
@@ -31,9 +31,9 @@ public class ListHomes implements CommandExecutor {
                 }
                 String list = builder.toString();
                 list = list.substring(0, list.length() - 2);
-                player.sendMessage(fireprefix + " " + ChatColor.GRAY + list);
+                player.sendMessage(prefix + " " + ChatColor.GRAY + list);
             }else if (validator.getErrormessage().contains("home")){
-                player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je hebt op het moment geen homes!");
+                player.sendMessage(prefix + " " + ChatColor.GRAY + "Je hebt op het moment geen homes!");
             }
         }
         return true;

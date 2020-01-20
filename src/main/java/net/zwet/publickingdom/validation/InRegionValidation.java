@@ -1,12 +1,14 @@
 package net.zwet.publickingdom.validation;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public class InRegionValidation implements Validation {
-    private WGBukkit bukkit;
+    private RegionQuery query;
 
     private RegionManager regioManager;
 
@@ -19,15 +21,17 @@ public class InRegionValidation implements Validation {
         this.world = world;
     }
 
-    public InRegionValidation(WGBukkit bukkit, Player player, World world) {
+    public InRegionValidation(RegionQuery query, Player player, World world) {
         this.player = player;
         this.world = world;
-        this.bukkit = bukkit;
+        this.query = query;
     }
 
     @Override
     public boolean isValid() {
-        boolean result = bukkit.getRegionManager(world).getApplicableRegions(player.getLocation()).size() != 0;
+
+        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        boolean result = query.getApplicableRegions(lplayer.getLocation()).size() != 0;
         if (!result){
             errormessage = "Je staat niet in een region!";
         }

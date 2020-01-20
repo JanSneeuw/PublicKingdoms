@@ -1,10 +1,11 @@
 naam: Targaryen
 prefix: '&4Targaryan'
-prefix-color: '&4'
-region: NONE
+name-color: '4'
+team-prefix: '[Targaryen]'
 Default-Rank: Burger
 Kingdom-World: world
-Region: Targaryen
+King: NONE
+region: NONE
 spawn:
   X: 0
   Y: 50
@@ -17,8 +18,11 @@ ranks:
       - k.setrank
       - k.relation
     prefix: '&6King'
+    limit: 1
     children:
       - HandOfTheKing
+      - Queen
+      - Burger
   Queen:
     perms:
       - k.kick
@@ -26,6 +30,9 @@ ranks:
       - k.setrank
       - k.relation
     prefix: '&6Queen'
+    children:
+      - HandOfTheKing
+      - Burger
   HandOfTheKing:
     perms:
       - k.kick
@@ -34,7 +41,14 @@ ranks:
       - k.relation
       - k.spawn
     prefix: -&6HandOfTheKing
+    children:
+      - Burger
   Burger:
     perms:
       - k.spawn
     prefix: '&7Burger'
+flags:
+  - enemy-break
+  - enemy-hit
+  - enemy-chest-open
+  - enemy-build

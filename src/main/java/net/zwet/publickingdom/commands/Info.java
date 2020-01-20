@@ -33,7 +33,7 @@ public class Info implements CommandExecutor {
             File folder = new File(plugin.getDataFolder() + File.separator + "players");
             File[] files = folder.listFiles();
             YamlConfiguration hs = new YamlConfiguration();
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             //noinspection deprecation
             if (Bukkit.getPlayer(args[0]) != null) {
                 @SuppressWarnings("deprecation")
@@ -46,7 +46,7 @@ public class Info implements CommandExecutor {
                 playerinventory.setItem(14, infodata.getRankItem());
                 playerinventory.setItem(15, infodata.getDeathsItem());
                 player.openInventory(playerinventory);
-                    /*player.sendMessage("§8§l§m-----------------§7[ §c§lFire§e§lKingdom§7 ]§8§l§m----------------");
+                    /*player.sendMessage(plugin.getConfig().getString(Help-Board-Header));
                     player.sendMessage("§7Naam§f: " + infodata.getName());
                     player.sendMessage("§7Kingdom§f: " + ChatColor.WHITE + infodata.getKingdom().getColoredName());
                     player.sendMessage("§7Rank§f: " + ChatColor.WHITE + infodata.getRank());
@@ -69,7 +69,7 @@ public class Info implements CommandExecutor {
                 kingdominventory.setItem(15, kingdom.getPlayersItem());
                 kingdominventory.setItem(16, kingdom.getDeathsItem());
                 player.openInventory(kingdominventory);
-                /*player.sendMessage("§8§l§m-----------------§7[ §c§lFire§e§lKingdom§7 ]§8§l§m----------------");
+                /*player.sendMessage(plugin.getConfig().getString(Help-Board-Header));
                 player.sendMessage("§7Kingdom§f: §7[" + kingdom.getColoredName() + "§7]");
                 player.sendMessage("§7Bondgenoten§f: §f" + kingdom.getAlliesString());
                 player.sendMessage("§7Vijanden§f: §f" + kingdom.getEnemiesString());

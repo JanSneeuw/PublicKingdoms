@@ -1,18 +1,13 @@
 package net.zwet.publickingdom.methods;
 
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_13_R2.IChatBaseComponent;
+import net.minecraft.server.v1_13_R2.PacketPlayOutChat;
 import net.zwet.publickingdom.objects.Playerdata;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
-import java.io.File;
-import java.util.List;
 
 public class hotbar {
     static Plugin plugin = Bukkit.getPluginManager().getPlugin("PublicKingdom");
@@ -36,7 +31,7 @@ public class hotbar {
     {
         CraftPlayer cp = (CraftPlayer)p;
         IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + ChatColor.translateAlternateColorCodes('&', message) + "\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte)2);
+        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc);
         cp.getHandle().playerConnection.sendPacket(ppoc);
     }
 }

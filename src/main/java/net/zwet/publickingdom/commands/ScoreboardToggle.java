@@ -22,14 +22,14 @@ public class ScoreboardToggle implements CommandExecutor {
         if (sender instanceof Player){
             Player player = (Player) sender;
             Playerdata playerdata = new Playerdata(player);
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
 
             try {
                 playerdata.toggleBoard();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            player.sendMessage(fireprefix + ChatColor.GRAY + " Je hebt je scoreboard uit gezet, relog om resultaat te zien!");
+            player.sendMessage(prefix + ChatColor.GRAY + " Je hebt je scoreboard uit gezet, relog om resultaat te zien!");
 
         }
 

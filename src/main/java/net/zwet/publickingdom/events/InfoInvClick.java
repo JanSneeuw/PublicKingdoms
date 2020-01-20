@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.InventoryView;
 
 
 public class InfoInvClick implements Listener {
@@ -21,7 +22,7 @@ public class InfoInvClick implements Listener {
 
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
-            if (event.getInventory().getTitle().contains(ChatColor.GRAY + "INFO")) {
+            if (event.getView().getTitle().contains(ChatColor.GRAY + "INFO")) {
                 if (event.getCurrentItem() != null) {
                     event.setCancelled(true);
                 }

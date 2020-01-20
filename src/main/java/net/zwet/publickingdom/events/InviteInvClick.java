@@ -1,7 +1,13 @@
 package net.zwet.publickingdom.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.Exceptions.NoSuchKingdomException;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.commands.Invite;
@@ -38,7 +44,7 @@ public class InviteInvClick implements Listener {
             Player player = (Player) event.getWhoClicked();
             Playerdata playerdata = new Playerdata(player);
             Scoreboard board = ScoreBoardCreateEvent.manager.getNewScoreboard();
-            if (event.getInventory().getTitle().contains("§7- " + ChatColor.GRAY + "Invite")) {
+            if (event.getView().getTitle().contains("§7- " + ChatColor.GRAY + "Invite")) {
                 event.setCancelled(true);
                 if (event.getCurrentItem() != null) {
                     ItemStack Clicked = event.getCurrentItem();
@@ -64,9 +70,9 @@ public class InviteInvClick implements Listener {
                                     }
 
                                     if (playerdata.boardIsOn()) {
-                                        Objective objective = board.registerNewObjective("FireKingdom", "dummy");
+                                        Objective objective = board.registerNewObjective("PublicKingdom", "dummy");
                                         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                                        objective.setDisplayName(ChatColor.WHITE + "   " + ChatColor.RED + ChatColor.BOLD + "Fire" + ChatColor.YELLOW + ChatColor.BOLD + "Kingdom" + ChatColor.RESET + ChatColor.WHITE + "   ");
+                                        objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Scoreboard-Title")));
 
                                         Score kingdomS = objective.getScore(ChatColor.RED + "kingdom:");
                                         kingdomS.setScore(20);
@@ -82,12 +88,16 @@ public class InviteInvClick implements Listener {
                                         blankSpot2.setScore(15);
                                         Score spot = objective.getScore(ChatColor.RED + "Locatie:");
                                         spot.setScore(14);
-                                        if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).getRegions().size() == 0) {
+                                        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                                        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                        RegionQuery query = regionContainer.createQuery();
+                                        if (query.getApplicableRegions(lplayer.getLocation()).getRegions().size() == 0) {
                                             Score locResult = objective.getScore(ChatColor.WHITE + "???");
                                             locResult.setScore(13);
 
                                         } else {
-                                            for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
+                                            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                            for (ProtectedRegion kingdomRegion : set) {
                                                 Score spotResult = objective.getScore(ChatColor.WHITE + kingdomRegion.getId().replaceAll("new-rhean", "§fNew-Rhean").replaceAll("katakinos", "§fKatakinos").replaceAll("spawn", "§fSpawn").replaceAll("ashanti", "§fAshanti").replaceAll("kayantos", "§fKayantos").replaceAll("tyros", "§fTyros").replaceAll("wellcliff", "§fWellcliff").replaceAll("peacevillage", "§fPeaceVillage").replaceAll("lumbridge", "§fLumbridge").replaceAll("zetios", "§fZetios").replaceAll("ziladia", "§fZiladia"));
                                                 spotResult.setScore(13);
                                             }
@@ -121,7 +131,12 @@ public class InviteInvClick implements Listener {
                                             }
                                             board.registerNewTeam(kds.get("naam").toString());
                                             board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                                            board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
+                                            if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                                board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                                            }
+                                            if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                                board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                                            }
                                         }
                                     }
                                     board.getTeam(Kingdom).addEntry(player.getName());
@@ -142,7 +157,7 @@ public class InviteInvClick implements Listener {
                                 player.closeInventory();
                                 YamlConfiguration kds = new YamlConfiguration();
                                 String Kingdom = Clicked.getItemMeta().getDisplayName().split(" ")[1];
-                                player.sendMessage( "§c§lFire§e§lKingdom §7- U heeft zojuist de invite geweigerd! ");
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message-Prefix")) +"- U heeft zojuist de invite geweigerd! ");
                                 event.setCancelled(true);
                             }
                         }

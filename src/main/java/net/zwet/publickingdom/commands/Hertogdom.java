@@ -22,7 +22,7 @@ public class Hertogdom implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1){
-            String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+            String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 Playerdata playerdata = new Playerdata(player);
@@ -31,20 +31,20 @@ public class Hertogdom implements CommandExecutor {
                 boolean passOn = hertogdomValidator.executeValidations();
                 if (passOn) {
                     Kingdom kingdom = new Kingdom(player);
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je wordt over§f 5 seconden §7naar je kingdom spawn geteleport!");
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Je wordt over§f 5 seconden §7naar je kingdom spawn geteleport!");
                     BukkitTask runnable = new BukkitRunnable() {
                             @Override
                             public void run() {
                                 if (Spawn.hspawner.containsKey(player)) {
                                     player.teleport(kingdom.getHertogdomLocation(args[0]));
                                     Spawn.hspawner.remove(player);
-                                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je bent nu bij je hertogdom!");
+                                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Je bent nu bij je hertogdom!");
                                 }
                             }
                         }.runTaskLater(plugin, 100L);
                         Spawn.hspawner.put(player, runnable);
                     }else{
-                        player.sendMessage(fireprefix + " " + ChatColor.GRAY + hertogdomValidator.getErrormessage());
+                        player.sendMessage(prefix + " " + ChatColor.GRAY + hertogdomValidator.getErrormessage());
                     }
                 }
             }

@@ -1,7 +1,12 @@
 package net.zwet.publickingdom.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.objects.Kingdom;
 import net.zwet.publickingdom.objects.Playerdata;
@@ -30,84 +35,84 @@ public class DeathMessage implements Listener {
         Playerdata playerdata = new Playerdata(player);
         EntityDamageEvent damegeevent = player.getLastDamageCause();
         EntityDamageEvent.DamageCause damageCause = damegeevent.getCause();
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         if (playerdata.exists()) {
             if (playerdata.isInKingdom()) {
                 Kingdom kingdom = new Kingdom(player);
                 if (kingdom.exists()) {
                     if (damageCause == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.DROWNING) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verdronken!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verdronken!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.CONTACT) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een block!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een block!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.FALL) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gevallen!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gevallen!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een vallend!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een vallend!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.FIRE) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.FIRE_TICK) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.LAVA) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door in de lava te zwemmen!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door in de lava te zwemmen!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.LIGHTNING) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door de bliksem!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door de bliksem!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.MAGIC) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door magic!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door magic!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.POISON) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het poison effect!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het poison effect!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.STARVATION) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is omgekomen van de honger!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is omgekomen van de honger!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.SUFFOCATION) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is gestikt in een muur!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is gestikt in een muur!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.THORNS) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door thorns!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door thorns!");
                     } else if (damageCause == EntityDamageEvent.DamageCause.VOID) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is in de void gevallen");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is in de void gevallen");
                     } else if (damageCause == EntityDamageEvent.DamageCause.WITHER) {
-                        event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het wither effect!");
+                        event.setDeathMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het wither effect!");
                     } else {
                         event.setDeathMessage(null);
                     }
                 }
             } else {
                 if (damageCause == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.DROWNING) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verdronken!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verdronken!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is opgeblazen!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.CONTACT) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een block!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een block!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.FALL) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gevallen!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gevallen!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een vallend!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door een vallend!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.FIRE) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.FIRE_TICK) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is verbrand!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.LAVA) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door in de lava te zwemmen!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door in de lava te zwemmen!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.LIGHTNING) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door de bliksem!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door de bliksem!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.MAGIC) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door magic!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door magic!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.POISON) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het poison effect!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het poison effect!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.STARVATION) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is omgekomen van de honger!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is omgekomen van de honger!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.SUFFOCATION) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is gestikt in een muur!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is gestikt in een muur!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.THORNS) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door thorns!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door thorns!");
                 } else if (damageCause == EntityDamageEvent.DamageCause.VOID) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is in de void gevallen");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is in de void gevallen");
                 } else if (damageCause == EntityDamageEvent.DamageCause.WITHER) {
-                    event.setDeathMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het wither effect!");
+                    event.setDeathMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + " " + player.getName() + ChatColor.GRAY + " is dood gegaan door het wither effect!");
                 } else {
                     event.setDeathMessage(null);
                 }
@@ -116,7 +121,7 @@ public class DeathMessage implements Listener {
     }
     @EventHandler
     public void sendDeathMessage(EntityDamageByEntityEvent event) {
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             Validator deathMessageValidator = new Validator().addValidation(new InKingdomValidation(player)).addValidation(new InRegionValidation(player, player.getWorld()));
@@ -128,7 +133,7 @@ public class DeathMessage implements Listener {
                         if (player.getHealth() <= event.getFinalDamage()) {
                             if (event.getDamager() instanceof Zombie) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een zombie!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een zombie!");
                                 }
                             } else if (event.getDamager() instanceof Player) {
                                 Player killer = (Player) event.getDamager();
@@ -137,23 +142,27 @@ public class DeathMessage implements Listener {
                                     if (killerdata.isInKingdom()) {
                                         Kingdom killerkingdom = new Kingdom(killer);
                                         if (killerkingdom.exists()) {
-                                            if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).size() != 0) {
-                                                for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
+                                            LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                                            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                            RegionQuery query = regionContainer.createQuery();
+                                            if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                                                ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                                for (ProtectedRegion kingdomRegion : set) {
                                                     if (!kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || !kingdom.hasFlag("enemy-hit")) {
                                                         if (!playerdata.getKingdomName().equals(killerdata.getKingdomName())) {
                                                             for (Player players : Bukkit.getOnlinePlayers()) {
                                                                 if (killer.getItemInHand() != null) {
                                                                     if (killer.getItemInHand().hasItemMeta()) {
                                                                         if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                         } else {
-                                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                         }
                                                                     } else {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                     }
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             }
                                                         }
@@ -165,38 +174,42 @@ public class DeathMessage implements Listener {
                                                         if (killer.getItemInHand() != null) {
                                                             if (killer.getItemInHand().hasItemMeta()) {
                                                                 if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         } else {
-                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     } else {
-                                        if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).size() != 0) {
-                                            for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
+                                        LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                                        RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                        RegionQuery query = regionContainer.createQuery();
+                                        if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                                            ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                            for (ProtectedRegion kingdomRegion : set) {
                                                 if (!kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || !kingdom.hasFlag("enemy-hit")) {
                                                     if (!playerdata.getKingdomName().equals(killerdata.getKingdomName())) {
                                                         for (Player players : Bukkit.getOnlinePlayers()) {
                                                             if (killer.getItemInHand() != null) {
                                                                 if (killer.getItemInHand().hasItemMeta()) {
                                                                     if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                     } else {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                     }
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         }
                                                     }
@@ -208,15 +221,15 @@ public class DeathMessage implements Listener {
                                                     if (killer.getItemInHand() != null) {
                                                         if (killer.getItemInHand().hasItemMeta()) {
                                                             if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         } else {
-                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                         }
                                                     } else {
-                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                     }
                                                 }
                                             }
@@ -225,59 +238,59 @@ public class DeathMessage implements Listener {
                                 }
                             } else if (event.getDamager() instanceof Skeleton) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een skeleton!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een skeleton!");
                                 }
                             } else if (event.getDamager() instanceof Spider) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een spider!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een spider!");
                                 }
                             } else if (event.getDamager() instanceof Slime) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een slime!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een slime!");
                                 }
                             } else if (event.getDamager() instanceof Ghast) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een ghast!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een ghast!");
                                 }
                             } else if (event.getDamager() instanceof PigZombie) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een pigman!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een pigman!");
                                 }
                             } else if (event.getDamager() instanceof Enderman) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een enderman!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een enderman!");
                                 }
                             } else if (event.getDamager() instanceof CaveSpider) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een cave spider!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een cave spider!");
                                 }
                             } else if (event.getDamager() instanceof Blaze) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een blaze!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een blaze!");
                                 }
                             } else if (event.getDamager() instanceof MagmaCube) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een magma cube!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een magma cube!");
                                 }
                             } else if (event.getDamager() instanceof Silverfish) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een silverfish!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een silverfish!");
                                 }
                             } else if (event.getDamager() instanceof EnderDragon) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door de ender dragon!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door de ender dragon!");
                                 }
                             } else if (event.getDamager() instanceof Guardian) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een guardian!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een guardian!");
                                 }
                             } else if (event.getDamager() instanceof Wolf) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een wolf!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een wolf!");
                                 }
                             } else if (event.getDamager() instanceof IronGolem) {
                                 for (Player players : Bukkit.getOnlinePlayers()) {
-                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een iron golem!");
+                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een iron golem!");
                                 }
                             } else if (event.getDamager() instanceof Arrow) {
                                 Arrow arrow = (Arrow) event.getDamager();
@@ -288,22 +301,26 @@ public class DeathMessage implements Listener {
                                         Kingdom killerkingdomdata = new Kingdom(killer);
                                         if (killerkingdomdata.exists()) {
                                             if (playerdata.getKingdomName().equalsIgnoreCase(killerdata.getKingdomName())) {
-                                                if (WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(player.getLocation()).size() != 0) {
-                                                    for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(player.getLocation())) {
+                                                LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                                                RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                                RegionQuery query = regionContainer.createQuery();
+                                                if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                                                    ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                                    for (ProtectedRegion kingdomRegion : set) {
                                                         if (!kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || !kingdom.hasFlag("enemy-hit")) {
                                                             for (Player players : Bukkit.getOnlinePlayers()) {
                                                                 if (killer.getItemInHand() != null) {
                                                                     if (killer.getItemInHand().hasItemMeta()) {
                                                                         if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                         } else {
-                                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                         }
                                                                     } else {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                     }
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             }
                                                         }
@@ -313,15 +330,15 @@ public class DeathMessage implements Listener {
                                                         if (killer.getItemInHand() != null) {
                                                             if (killer.getItemInHand().hasItemMeta()) {
                                                                 if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         } else {
-                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdomdata.getColoredName() + ChatColor.WHITE + "][" + killerkingdomdata.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                         }
                                                     }
                                                 }
@@ -329,22 +346,26 @@ public class DeathMessage implements Listener {
                                         }
                                     } else {
                                         if (!playerdata.getKingdomName().equalsIgnoreCase(killerdata.getKingdomName())) {
-                                            if (WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(player.getLocation()).size() != 0) {
-                                                for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(Bukkit.getWorld(plugin.getConfig().getString("Kingdom-World"))).getApplicableRegions(player.getLocation())) {
+                                            LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                                            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                            RegionQuery query = regionContainer.createQuery();
+                                            if (query.getApplicableRegions(lplayer.getLocation()).size() != 0) {
+                                                ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                                for (ProtectedRegion kingdomRegion : set) {
                                                     if (!kingdomRegion.getId().equalsIgnoreCase(kingdom.getRegion().getId()) || !kingdom.hasFlag("enemy-hit")) {
                                                         for (Player players : Bukkit.getOnlinePlayers()) {
                                                             if (killer.getItemInHand() != null) {
                                                                 if (killer.getItemInHand().hasItemMeta()) {
                                                                     if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                                     } else {
-                                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                     }
                                                                 } else {
-                                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                                 }
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         }
                                                     }
@@ -354,15 +375,15 @@ public class DeathMessage implements Listener {
                                                     if (killer.getItemInHand() != null) {
                                                         if (killer.getItemInHand().hasItemMeta()) {
                                                             if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                             } else {
-                                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                             }
                                                         } else {
-                                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                         }
                                                     } else {
-                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                     }
                                                 }
                                             }
@@ -376,7 +397,7 @@ public class DeathMessage implements Listener {
                     if (player.getHealth() <= event.getFinalDamage()) {
                         if (event.getDamager() instanceof Zombie) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een zombie!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een zombie!");
                             }
                         } else if (event.getDamager() instanceof Player) {
                             Player killer = (Player) event.getDamager();
@@ -388,15 +409,15 @@ public class DeathMessage implements Listener {
                                         if (killer.getItemInHand() != null) {
                                             if (killer.getItemInHand().hasItemMeta()) {
                                                 if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(playerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                 } else {
-                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                 }
                                             } else {
-                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                             }
                                         } else {
-                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + killerkingdom.getColoredName() + ChatColor.WHITE + "][" + killerkingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                         }
                                     }
 
@@ -406,15 +427,15 @@ public class DeathMessage implements Listener {
                                     if (killer.getItemInHand() != null) {
                                         if (killer.getItemInHand().hasItemMeta()) {
                                             if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                             } else {
-                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                             }
                                         } else {
-                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                         }
                                     } else {
-                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                     }
                                 }
                             }
@@ -422,59 +443,59 @@ public class DeathMessage implements Listener {
 
                         }else if (event.getDamager() instanceof Skeleton) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een skeleton!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een skeleton!");
                             }
                         } else if (event.getDamager() instanceof Spider) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een spider!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een spider!");
                             }
                         } else if (event.getDamager() instanceof Slime) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een slime!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een slime!");
                             }
                         } else if (event.getDamager() instanceof Ghast) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een ghast!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een ghast!");
                             }
                         } else if (event.getDamager() instanceof PigZombie) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een pigman!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een pigman!");
                             }
                         } else if (event.getDamager() instanceof Enderman) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een enderman!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een enderman!");
                             }
                         } else if (event.getDamager() instanceof CaveSpider) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een cave spider!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een cave spider!");
                             }
                         } else if (event.getDamager() instanceof Blaze) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een blaze!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een blaze!");
                             }
                         } else if (event.getDamager() instanceof MagmaCube) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een magma cube!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een magma cube!");
                             }
                         } else if (event.getDamager() instanceof Silverfish) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een silverfish!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een silverfish!");
                             }
                         } else if (event.getDamager() instanceof EnderDragon) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door de ender dragon!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door de ender dragon!");
                             }
                         } else if (event.getDamager() instanceof Guardian) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een guardian!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een guardian!");
                             }
                         } else if (event.getDamager() instanceof Wolf) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een wolf!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een wolf!");
                             }
                         } else if (event.getDamager() instanceof IronGolem) {
                             for (Player players : Bukkit.getOnlinePlayers()) {
-                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een iron golem!");
+                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door een iron golem!");
                             }
                         } else if (event.getDamager() instanceof Arrow) {
                             Arrow arrow = (Arrow) event.getDamager();
@@ -487,15 +508,15 @@ public class DeathMessage implements Listener {
                                             if (killer.getItemInHand() != null) {
                                                 if (killer.getItemInHand().hasItemMeta()) {
                                                     if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                     } else {
-                                                        players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                        players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                     }
                                                 } else {
-                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                 }
                                             } else {
-                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + kingdom.getColoredName() + ChatColor.WHITE + "][" + kingdom.getColoredRank(killerdata.getRank()) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                             }
                                         }
                                 } else {
@@ -503,15 +524,15 @@ public class DeathMessage implements Listener {
                                         if (killer.getItemInHand() != null) {
                                             if (killer.getItemInHand().hasItemMeta()) {
                                                 if (killer.getItemInHand().getItemMeta().hasDisplayName()) {
-                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
+                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + " met " + killer.getItemInHand().getItemMeta().getDisplayName());
                                                 } else {
-                                                    players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                    players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                                 }
                                             } else {
-                                                players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                                players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                             }
                                         } else {
-                                            players.sendMessage(fireprefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
+                                            players.sendMessage(prefix + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " is vermoord door " + ChatColor.WHITE + "[" + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Kingdomloos")) + ChatColor.WHITE + "]" + ChatColor.YELLOW + killer.getName() + ChatColor.GRAY + "!");
                                         }
                                     }
                                 }

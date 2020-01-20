@@ -16,7 +16,12 @@ public class CommandCompletion implements TabCompleter {
             List<String> commands = new ArrayList<>();
             if (args[0].equalsIgnoreCase("a")){
                 commands.add("ally");
+            }else if (args[0].equalsIgnoreCase("e")){
+                commands.add("enemy");
+            }else if (args[0].equalsIgnoreCase("i")){
+
             }
+
             commands.add("ally");
             commands.add("enemy");
             commands.add("info");
@@ -31,11 +36,11 @@ public class CommandCompletion implements TabCompleter {
             commands.add("toggleboard");
             commands.add("hertogdom");
             commands.add("sethertogdom");
-            if (sender.hasPermission("firekingdom.home")) {
+            if (sender.hasPermission("kingdom.home")) {
                 commands.add("sethome");
                 commands.add("home");
             }
-            if (sender.hasPermission("firekingdom.staff")) {
+            if (sender.hasPermission("publickingdom.staff")) {
                 commands.add("set");
                 commands.add("define");
                 commands.add("clean");

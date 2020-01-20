@@ -1,126 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PublicKingdoms" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="decd33ef-4e88-4f88-b1c8-3403a52f15cd" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
+    <list default="true" id="ee5c25d8-9f12-46e6-866f-3f7dab46ed09" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/KingdomPlugin 1.14.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/KingdomPlugin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PublicKingdoms.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/Exceptions/NoSuchRankInKingdom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/custom_events/ApplicationSendEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ApplicationSend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Rank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_17_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_commandbook_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_dummypermscompat_1_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_jchronic_0_2_4a.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_lib_jlibnoise_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_spigot_bukkit_classloader_check_1_8_R0_1_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_worldedit_5_5_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_worldedit_worldedit_bukkit_6_1_4_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_worldedit_worldedit_core_6_1_4_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_worldguard_6_1_1_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_paranamer_paranamer_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_schlichtherle_truezip_6_8_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_opencsv_opencsv_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_ibatis_ibatis_sqlmap_2_3_4_726.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_avaje_ebean_2_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bukkit_bukkit_1_8_8_R0_1_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_all_1_10_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongo_java_driver_3_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_1_8_8_R0_1_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__rhino_js_1_7R2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ru_tehkode_PermissionsEx_1_23_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PublicKingdom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PublicKingdom.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/PublicKingdom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/PublicKingdom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Ally.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Ally.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/BaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/BaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Clean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Clean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Define.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Define.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Help.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Hertogdom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Hertogdom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/HertogdomDefine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/HertogdomDefine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Invite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Invite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Join.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Kick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Kick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ListHomes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ListHomes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/RemoveHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/RemoveHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Rename.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Rename.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ScoreboardToggle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ScoreboardToggle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Set.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/SetHertogdomSpawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/SetHertogdomSpawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Sethome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Sethome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setrank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setrank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setspawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setspawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Spawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Spawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/AllyHit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/AllyHit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ApplicationEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ApplicationEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BPEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BPEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChatEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChatEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChestOpenEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChestOpenEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/HitEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/HitEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InfoInvClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InfoInvClick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InviteInvClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InviteInvClick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KingdomloosJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KingdomloosJoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/MoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/MoveEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ScoreBoardCreateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ScoreBoardCreateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/methods/TitleMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/methods/TitleMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/methods/hotbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/methods/hotbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Kingdom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Kingdom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Playerdata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/Playerdata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/TitleMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/objects/TitleMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/tabcompletions/CommandCompletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/tabcompletions/CommandCompletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validation/InRegionValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validation/InRegionValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Targaryen.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Targaryen.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/zwet/publickingdom/validation/InRegionValidationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/zwet/publickingdom/validation/InRegionValidationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/zwet/publickingdom/validation/ItemInHandValidationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/zwet/publickingdom/validation/ItemInHandValidationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Targaryen.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Targaryen.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/Exceptions/NoSuchKingdomException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Accept.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Ally.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Applications.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/BaseCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Clean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Define.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Enemy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Help.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Hertogdom$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Hertogdom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/HertogdomDefine.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Home$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Home.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Invite.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Join.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Kick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/List.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/ListHomes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/RemoveHome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Rename.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/ScoreboardToggle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Set.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/SetHertogdomSpawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Sethome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Setrank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Setspawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Spawn$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/commands/Spawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/AllyHit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/ApplicationEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/BB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/BPEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/ChatEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/ChestOpenEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/DeathEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/DeathMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/HitEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/InfoInvClick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/InviteInvClick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/JoinEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/KillEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/KingdomloosJoin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/MoveEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/Respawn$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/Respawn$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/Respawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/ScoreBoardCreateEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/events/TPJoin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/firekd$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/firekd.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/methods/TitleMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/methods/hotbar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/objects/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/objects/Kingdom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/objects/Playerdata.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/objects/TitleMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/tabcompletions/CommandCompletion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/AlreadyGotApplicationValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/AreAlliesValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/AreEnemiesValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/ArgsEqualsLengthValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasBukkitPermissionValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasCertainHome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasDisplayNameValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasHertogdomValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasHomeValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasItemMetaValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasPermissionValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HasRegionValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/HertogdomExistsValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/InKingdomValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/InRegionValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/IsHigherValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/IsSpawningValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/ItemInHandValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/KingdomExistsValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/KingdomHasFlagValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/KingdomHasRegionValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/MaxAlliesReachedValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/NotAllyValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/NotEnemyValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/NotInKingomValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/NotSpawningValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/PlayerOnlineValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/ShareKingdomValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/Validation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/zwet/firekd/validation/Validator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/AlreadyGotApplicationValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/AreAlliesValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/AreEnemiesValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasBukkitPermissionValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasDisplayNameValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasHertogdomValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasHomeValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasItemMetaValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasPermissionValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HasRegionValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/HertogdomExistsValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/InKingdomValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/InRegionValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/IsHigherValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/IsSpawningValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/ItemInHandValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/KingdomExistsValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/KingdomHasFlagValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/KingdomHasRegionValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/MaxAlliesReachedValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/NotAllyValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/NotEnemyValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/PlayerOnlineValidationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/net/zwet/firekd/validation/ShareKingdomValidationTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PublicKingdom.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/PublicKingdom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllyHit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/AllyHit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="38" column="61" selection-start-line="38" selection-start-column="61" selection-end-line="38" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandCompletion.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/tabcompletions/CommandCompletion.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1680">
-              <caret line="112" column="17" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreboardToggle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ScoreboardToggle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Setrank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setrank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Setspawn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setspawn.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Spawn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Spawn.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/BaseCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -131,691 +242,168 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>firekd</find>
+      <find>Config</find>
+      <find>getConfig()</find>
+      <find>Application</find>
+      <find>.permission</find>
+      <find>hasPermission</find>
+      <find>fireprefix</find>
+      <find>Fire</find>
+      <find>Region</find>
+      <find>kingdomdata.getString(&quot;Regio</find>
+      <find>kingdomdata.</find>
+      <find>AllyHit</find>
+      <find>Scoreboard</find>
+      <find>rankLimit</find>
+      <find>define</find>
+      <find>Kills</find>
+      <find>WGBukkit</find>
+      <find>kds</find>
+      <find>kds``</find>
+      <find>setPrefix(</find>
+      <find>children</find>
+      <find>isHigherThan</find>
+      <find>hasFlag</find>
+      <find>Database</find>
+      <find>kingdomloos</find>
+      <find>kingdomloos-spawn</find>
+      <find>fire</find>
+      <find>test</find>
+      <find>name-color</find>
+      <find>getRegion</find>
+      <find>setRegion</find>
     </findStrings>
     <replaceStrings>
-      <replace>publickingdom</replace>
-      <replace>PublicKingdom</replace>
+      <replace />
+      <replace>prefix</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/src/main/java/net/zwet/publickingdom</dir>
+      <dir>F:\git\PublicKingdom\KingdomPlugin\src\main\java\net\zwet\publickingdom\objects</dir>
     </dirStrings>
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validations/Validator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validations/Validation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validations/KingdomHasFlagValidation.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InfoInvClick.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KingdomloosJoin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KillEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/MoveEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/Respawn.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/TPJoin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Ally.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Help.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Home.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ListHomes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/RemoveHome.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ScoreboardToggle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/SetHertogdomSpawn.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Sethome.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setspawn.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChatEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/AllyHit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BPEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChestOpenEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/HitEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InviteInvClick.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/JoinEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ScoreBoardCreateEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/BaseCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Enemy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Define.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Hertogdom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/HertogdomDefine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Invite.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Join.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Kick.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/List.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Set.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setrank.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Spawn.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/PublicKingdom.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/tabcompletions/CommandCompletion.java" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="downloadDocsAutomatically" value="true" />
-        <option name="downloadSourcesAutomatically" value="true" />
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="713" />
-    <option name="y" value="-4" />
-    <option name="width" value="1293" />
-    <option name="height" value="764" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="publickingdom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="publickingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="methods" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="publickingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="tabcompletions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PublicKingdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PublicKingdom" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectId" id="1UJKVCyKUkfEr8NiiC9yGIdWuoJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549760876714" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PermissionsEx-1.23.4.jar!/" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/validations" />
-    </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="PublicKingdom build" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="clean" />
-                <option value="package" />
-              </list>
-            </option>
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="decd33ef-4e88-4f88-b1c8-3403a52f15cd" name="Default" comment="" />
-      <created>1535830315293</created>
+      <changelist id="ee5c25d8-9f12-46e6-866f-3f7dab46ed09" name="Default Changelist" comment="" />
+      <created>1549480412240</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1535830315293</updated>
-      <workItem from="1535830319577" duration="612000" />
-      <workItem from="1537650327699" duration="1283000" />
-      <workItem from="1538413968125" duration="933000" />
-      <workItem from="1538861048562" duration="1593000" />
-      <workItem from="1545833046013" duration="4000" />
-      <workItem from="1545833110746" duration="4317000" />
-      <workItem from="1546091605151" duration="443000" />
-      <workItem from="1547904556449" duration="610000" />
-      <workItem from="1548880399386" duration="803000" />
-      <workItem from="1549118884056" duration="1460000" />
-      <workItem from="1549379339554" duration="2026000" />
+      <updated>1549480412240</updated>
+      <workItem from="1549480416175" duration="701000" />
+      <workItem from="1549481151717" duration="2488000" />
+      <workItem from="1549570452907" duration="2487000" />
+      <workItem from="1549725018020" duration="1792000" />
+      <workItem from="1549726931224" duration="1177000" />
+      <workItem from="1549756620749" duration="4250000" />
+      <workItem from="1550516465778" duration="52000" />
+      <workItem from="1550516549988" duration="56000" />
+      <workItem from="1550773627921" duration="1246000" />
+      <workItem from="1550849024889" duration="697000" />
+      <workItem from="1551218066459" duration="57000" />
+      <workItem from="1551218235810" duration="3521000" />
+      <workItem from="1551398905141" duration="65000" />
+      <workItem from="1551399704634" duration="659000" />
+      <workItem from="1558727011238" duration="1896000" />
+      <workItem from="1559060936603" duration="216000" />
+      <workItem from="1559061419492" duration="245000" />
+      <workItem from="1559061826533" duration="852000" />
+      <workItem from="1559103811657" duration="6496000" />
+      <workItem from="1559138963418" duration="5419000" />
+      <workItem from="1559213089425" duration="3220000" />
+      <workItem from="1559240701920" duration="956000" />
+      <workItem from="1559242586430" duration="870000" />
+      <workItem from="1559246211365" duration="5240000" />
+      <workItem from="1559327069772" duration="595000" />
+      <workItem from="1559397321307" duration="2376000" />
+      <workItem from="1559425981645" duration="645000" />
+      <workItem from="1559909397961" duration="506000" />
+      <workItem from="1559916312959" duration="73000" />
+      <workItem from="1559993242998" duration="203000" />
+      <workItem from="1559994812379" duration="55000" />
+      <workItem from="1560456664365" duration="2653000" />
+      <workItem from="1560513556201" duration="12225000" />
+      <workItem from="1560637353545" duration="2302000" />
+      <workItem from="1560866423186" duration="4831000" />
+      <workItem from="1560976877389" duration="45000" />
+      <workItem from="1575069281620" duration="5795000" />
+      <workItem from="1577053658375" duration="1102000" />
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14084000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28057554" />
-      <window_info anchor="bottom" id="Analysis" order="7" />
-      <window_info anchor="right" id="Database" order="3" weight="0.32946378" />
-      <window_info id="Learn" order="2" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
-    </layout>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/firekd/firekd.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ApplicationEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/BPEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChatEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ChestOpenEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/DeathMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/HitEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InfoInvClick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/InviteInvClick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/JoinEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KillEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/KingdomloosJoin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/MoveEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/Respawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/ScoreBoardCreateEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/TPJoin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Accept.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Ally.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Applications.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Clean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Define.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Enemy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Help.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Hertogdom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/HertogdomDefine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Invite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Join.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Kick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ListHomes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/RemoveHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Rename.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/SetHertogdomSpawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Sethome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setrank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Setspawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/Spawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/BaseCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="112" column="17" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/commands/ScoreboardToggle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/PublicKingdom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/events/AllyHit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="38" column="61" selection-start-line="38" selection-start-column="61" selection-end-line="38" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/zwet/publickingdom/tabcompletions/CommandCompletion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>PublicKingdoms</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -835,7 +423,6 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Python 2.7 interpreter library</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -864,7 +451,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -872,7 +458,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: com.google.code.gson:gson:2.2.4</last-edited>
+          <last-edited>Maven: com.google.code.findbugs:jsr305:1.3.9</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

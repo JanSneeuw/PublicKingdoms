@@ -1,9 +1,10 @@
 name: PublicKingdom
 version: ${project.version}
-version: 2.1.1
 main: net.zwet.publickingdom.PublicKingdom
 authors: [JanSneeuw]
-description: Rewrite van de kingdom plugin van FireKingdom
+description: Kingdom plugin.
+depend: [WorldGuard]
+api-version: '1.13'
 commands:
   K:
     description: Basecommand

@@ -21,7 +21,7 @@ public class Ally implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         Kingdom kingdom = new Kingdom(player);
         Playerdata PlayerData = new Playerdata(player);
         if (args.length > 0) {
@@ -38,10 +38,10 @@ public class Ally implements CommandExecutor {
                     if (passOn) {
                         kingdom.addAlly(allykingdom);
                             for (Player allplayers : Bukkit.getOnlinePlayers()) {
-                                allplayers.sendMessage(fireprefix + ChatColor.WHITE + kingdom.getName() + " §7en§f " + allykingdom.getName() + "§7 hebben nu een alliantie!");
+                                allplayers.sendMessage(prefix + ChatColor.WHITE + kingdom.getName() + " §7en§f " + allykingdom.getName() + "§7 hebben nu een alliantie!");
                             }
                     }else{
-                        player.sendMessage(fireprefix + ChatColor.GRAY + " " + allyValidator.getErrormessage());
+                        player.sendMessage(prefix + ChatColor.GRAY + " " + allyValidator.getErrormessage());
                     }
             }else {
                 Kingdom allykingdom = null;
@@ -55,10 +55,10 @@ public class Ally implements CommandExecutor {
                 if (passOn) {
                     kingdom.removeAlly(allykingdom);
                     for (Player allplayers : Bukkit.getOnlinePlayers()) {
-                        allplayers.sendMessage(fireprefix + ChatColor.WHITE + kingdom.getName() + " §7en§f " + allykingdom.getName() + "§7 zijn niet langer bondgenoten!");
+                        allplayers.sendMessage(prefix + ChatColor.WHITE + kingdom.getName() + " §7en§f " + allykingdom.getName() + "§7 zijn niet langer bondgenoten!");
                     }
                 } else {
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + allyValidator.getErrormessage());
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + allyValidator.getErrormessage());
                 }
             }
         }

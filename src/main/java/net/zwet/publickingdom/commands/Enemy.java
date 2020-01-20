@@ -20,7 +20,7 @@ public class Enemy implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         Kingdom kingdom = new Kingdom(player);
         Playerdata PlayerData = new Playerdata(player);
         if (!args[0].equalsIgnoreCase("remove")) {
@@ -37,10 +37,10 @@ public class Enemy implements CommandExecutor {
                 if (passOn) {
                     kingdom.addEnemy(enemykingdom);
                     for (Player allplayers : Bukkit.getOnlinePlayers()) {
-                        allplayers.sendMessage(fireprefix + " " + kingdom.getName() + " §7en§4 " + enemykingdom.getName() + " §7zijn nu enemy!");
+                        allplayers.sendMessage(prefix + ChatColor.WHITE + kingdom.getName() + " §7en " + ChatColor.WHITE + enemykingdom.getName() + " §7zijn nu enemy!");
                     }
                 }else{
-                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + enemyValidator.getErrormessage());
+                    player.sendMessage(prefix + " " + ChatColor.GRAY + enemyValidator.getErrormessage());
                 }
                 return true;
             }
@@ -57,10 +57,10 @@ public class Enemy implements CommandExecutor {
             if (passOn) {
                 kingdom.removeEnemy(enemykingdom);
                 for (Player allplayers : Bukkit.getOnlinePlayers()) {
-                    allplayers.sendMessage(fireprefix + " §4" + kingdom.getName() + " §7en§4 " + enemykingdom.getName() + " §7zijn niet langer vijanden!!");
+                    allplayers.sendMessage(prefix + ChatColor.WHITE + kingdom.getName() + " §7en " + ChatColor.WHITE + enemykingdom.getName() + " §7zijn niet langer vijanden!!");
                 }
             }else{
-                player.sendMessage(fireprefix + " " + ChatColor.GRAY + enemyValidator.getErrormessage());
+                player.sendMessage(prefix + " " + ChatColor.GRAY + enemyValidator.getErrormessage());
             }
         }
 

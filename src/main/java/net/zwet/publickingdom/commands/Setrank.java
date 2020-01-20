@@ -1,7 +1,13 @@
 package net.zwet.publickingdom.commands;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
+
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.zwet.publickingdom.PublicKingdom;
 import net.zwet.publickingdom.events.ScoreBoardCreateEvent;
 import net.zwet.publickingdom.objects.Kingdom;
@@ -31,7 +37,7 @@ public class Setrank implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         if (args.length == 2) {
             //noinspection deprecation
             if (Bukkit.getPlayer(args[0]) != null){
@@ -45,10 +51,10 @@ public class Setrank implements CommandExecutor {
 
                     if (rankeddata.isInKingdom()) {
                         Kingdom rankedkingdom = new Kingdom(ranked);
-                        if (kingdom.getName().equalsIgnoreCase(rankedkingdom.getName()) || player.hasPermission("FireKingdom.Staff")) {
-                            if (playerdata.hasPermission("k.setrank") || player.hasPermission("FireKingdom.Staff")) {
+                        if (kingdom.getName().equalsIgnoreCase(rankedkingdom.getName()) || player.hasPermission("publickingdom.Staff")) {
+                            if (playerdata.hasPermission("k.setrank") || player.hasPermission("publickingdom.Staff")) {
                                 if (kingdom.hasRank(args[1])) {
-                                    if ((playerdata.isHigherThan(args[1]) && !playerdata.getRank().equalsIgnoreCase(args[1])) || player.hasPermission("FireKingdom.Staff")) {
+                                    if ((playerdata.isHigherThan(args[1]) && !playerdata.getRank().equalsIgnoreCase(args[1])) || player.hasPermission("publickingdom.Staff")) {
                                         if (!kingdom.rankLimitReached(args[1])) {
                                             File[] kdfiles = new File(plugin.getDataFolder() + File.separator + "kingdoms").listFiles();
                                             YamlConfiguration kds = new YamlConfiguration();
@@ -57,13 +63,13 @@ public class Setrank implements CommandExecutor {
                                             } catch (IOException e) {
                                                 e.printStackTrace();
                                             }
-                                            ranked.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je bent nu §f" + args[1] + "§7!");
-                                            player.sendMessage(fireprefix + " " + ChatColor.WHITE + ranked.getName() + " §7is nu §f" + args[1] + "§7!");
+                                            ranked.sendMessage(prefix + " " + ChatColor.GRAY + "Je bent nu §f" + args[1] + "§7!");
+                                            player.sendMessage(prefix + " " + ChatColor.WHITE + ranked.getName() + " §7is nu §f" + args[1] + "§7!");
 
                                             if (rankeddata.boardIsOn()) {
-                                                Objective objective = board.registerNewObjective("FireKingdom", "dummy");
+                                                Objective objective = board.registerNewObjective("PublicKingdom", "dummy");
                                                 objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                                                objective.setDisplayName(ChatColor.WHITE + "   " + ChatColor.RED + ChatColor.BOLD + "Fire" + ChatColor.YELLOW + ChatColor.BOLD + "Kingdom" + ChatColor.RESET + ChatColor.WHITE + "   ");
+                                                objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Scoreboard-Title")));
 
                                                 Score k = objective.getScore(ChatColor.RED + "Kingdom:");
                                                 k.setScore(20);
@@ -79,12 +85,17 @@ public class Setrank implements CommandExecutor {
                                                 blankSpot2.setScore(15);
                                                 Score spot = objective.getScore(ChatColor.RED + "Locatie:");
                                                 spot.setScore(11);
-                                                if (WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(ranked.getLocation()).getRegions().size() == 0) {
+                                                LocalPlayer lplayer = WorldGuardPlugin.inst().wrapPlayer(ranked);
+                                                RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                                                RegionQuery query = regionContainer.createQuery();
+
+                                                if (query.getApplicableRegions(lplayer.getLocation()).getRegions().size() == 0) {
                                                     Score locResult = objective.getScore(ChatColor.WHITE + "???");
                                                     locResult.setScore(10);
 
                                                 } else {
-                                                    for (ProtectedRegion kingdomRegion : WGBukkit.getRegionManager(ranked.getWorld()).getApplicableRegions(ranked.getLocation())) {
+                                                    ApplicableRegionSet set = query.getApplicableRegions(lplayer.getLocation());
+                                                    for (ProtectedRegion kingdomRegion : set) {
                                                         Score spotResult = objective.getScore(ChatColor.WHITE + kingdomRegion.getId().replaceAll("new-rhean", "§fNew-Rhean").replaceAll("katakinos", "§fKatakinos").replaceAll("spawn", "§fSpawn").replaceAll("ashanti", "§fAshanti").replaceAll("kayantos", "§fKayantos").replaceAll("tyros", "§fTyros").replaceAll("wellcliff", "§fWellcliff").replaceAll("peacevillage", "§fPeaceVillage").replaceAll("lumbridge", "§fLumbridge").replaceAll("zetios", "§fZetios").replaceAll("ziladia", "§fZiladia"));
                                                         spotResult.setScore(10);
                                                     }
@@ -95,6 +106,13 @@ public class Setrank implements CommandExecutor {
                                                     Score king = objective.getScore(ChatColor.RED + "Koning:");
                                                     king.setScore(14);
                                                     Score kingResult = objective.getScore(ChatColor.WHITE + kingdom.getKing().getName());
+                                                    kingResult.setScore(13);
+                                                }else{
+                                                    Score blankSpot3 = objective.getScore(ChatColor.BLUE + "     ");
+                                                    blankSpot3.setScore(12);
+                                                    Score king = objective.getScore(ChatColor.RED + "Koning:");
+                                                    king.setScore(14);
+                                                    Score kingResult = objective.getScore(ChatColor.WHITE + "GEEN");
                                                     kingResult.setScore(13);
                                                 }
                                             }
@@ -110,7 +128,12 @@ public class Setrank implements CommandExecutor {
                                                     }
                                                     board.registerNewTeam(kds.get("naam").toString());
                                                     board.getTeam(kds.get("naam").toString()).setAllowFriendlyFire(false);
-                                                    board.getTeam(kds.get("naam").toString()).setPrefix(kds.get("prefix-color").toString().replace('&', '§'));
+                                                    if (!kds.getString("team-prefix").equalsIgnoreCase("NONE")) {
+                                                        board.getTeam(kds.get("naam").toString()).setPrefix(ChatColor.translateAlternateColorCodes('&',kds.getString("team-prefix")));
+                                                    }
+                                                    if (!kds.getString("name-color").equalsIgnoreCase("NONE")) {
+                                                        board.getTeam(kds.get("naam").toString()).setColor(ChatColor.getByChar(kds.getString("name-color").replace('&', '§')));
+                                                    }
                                                 }
                                             }
 
@@ -124,30 +147,30 @@ public class Setrank implements CommandExecutor {
 
                                             return true;
                                         } else {
-                                            player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je kan deze rank niet geven omdat de limit is behaald!");
+                                            player.sendMessage(prefix + " " + ChatColor.GRAY + "Je kan deze rank niet geven omdat de limit is behaald!");
                                             return true;
                                         }
 
                                     } else {
-                                        player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je hebt niet het recht deze rank te geven!");
+                                        player.sendMessage(prefix + " " + ChatColor.GRAY + "Je hebt niet het recht deze rank te geven!");
                                     }
 
                                 } else {
-                                    player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Deze rank bestaat niet!");
+                                    player.sendMessage(prefix + " " + ChatColor.GRAY + "Deze rank bestaat niet!");
                                     return true;
                                 }
 
                             } else {
-                                player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Je hebt niet de juiste permissions om dit te doen!");
+                                player.sendMessage(prefix + " " + ChatColor.GRAY + "Je hebt niet de juiste permissions om dit te doen!");
                                 return true;
                             }
                         } else {
-                            player.sendMessage(fireprefix + " " + ChatColor.GRAY + "Deze speler zit niet in je kingdom!");
+                            player.sendMessage(prefix + " " + ChatColor.GRAY + "Deze speler zit niet in je kingdom!");
                         }
                     }
                     }
                 } else {
-                player.sendMessage(fireprefix + " " + ChatColor.GRAY+ "Deze speler is niet online!");
+                player.sendMessage(prefix + " " + ChatColor.GRAY+ "Deze speler is niet online!");
                 return true;
             }
             }

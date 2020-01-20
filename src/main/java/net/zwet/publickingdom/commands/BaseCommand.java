@@ -117,8 +117,9 @@ public class BaseCommand implements CommandExecutor {
         }else{
             if (sender instanceof Player){
                 Player player = (Player) sender;
-                player.sendMessage(ChatColor.RED + "§c§lFire§e§lKingdom §7- Deze plugin is gemaakt door JanSneeuw!");
-                player.sendMessage(ChatColor.RED + "§c§lFire§e§lKingdom §7- Gebruik /k help voor meer informatie!");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("Message-Prefix")) + "§7- Deze plugin is gemaakt door JanSneeuw!");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("Message-Prefix")) + "§7- Gebruik /k help voor meer informatie!");
+
             }
         }
         return true;

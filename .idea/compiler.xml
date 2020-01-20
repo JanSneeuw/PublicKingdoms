@@ -7,10 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PublicKingdom" />
+        <module name="KingdomPlugin" />
+        <module name="KingdomPlugin 1.13.2" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PublicKingdom" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -21,7 +21,7 @@ public class KingdomloosJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
-        String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
         Playerdata playerdata = null;
         try{
             playerdata = new Playerdata(player);
@@ -32,7 +32,7 @@ public class KingdomloosJoin implements Listener {
             Validator validator = new Validator().addValidation(new NotInKingomValidation(playerdata));
             boolean passOn = validator.executeValidations();
             if (passOn){
-                Bukkit.broadcastMessage(fireprefix + ChatColor.GRAY + "De speler " + ChatColor.WHITE + player.getName() + ChatColor.GRAY + " is nog '" +ChatColor.DARK_GREEN + "kingdomloos" + ChatColor.GRAY + "'");
+                Bukkit.broadcastMessage(prefix + ChatColor.GRAY + "De speler " + ChatColor.WHITE + player.getName() + ChatColor.GRAY + " is nog '" +ChatColor.DARK_GREEN + "kingdomloos" + ChatColor.GRAY + "'");
             }
         }
     }

@@ -16,7 +16,7 @@ public class Rename implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            if (player.hasPermission("firekingdom.staff")){
+            if (player.hasPermission("publickingdom.staff")){
                 if (args.length == 2){
                     Kingdom kingdom = null;
                     try{

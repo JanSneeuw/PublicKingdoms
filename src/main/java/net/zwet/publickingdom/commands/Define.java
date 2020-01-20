@@ -23,8 +23,8 @@ public class Define implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 1) {
-                String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
-                if (player.hasPermission("FireKingdom.staff")) {
+                String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+                if (player.hasPermission("publickingdom.staff")) {
                     Playerdata PlayerData = new Playerdata(player);
                     Kingdom kingdom = null;
                     try {
@@ -36,7 +36,7 @@ public class Define implements CommandExecutor {
                         kingdom.setRegion(player);
                     }
                 } else {
-                    player.sendMessage(fireprefix + " " + ChatColor.RED + "Je staat niet in een worldguard region!");
+                    player.sendMessage(prefix + " " + ChatColor.RED + "Je staat niet in een worldguard region!");
                 }
             }else if (args.length == 2){
                 Playerdata playerdata = new Playerdata(player);
@@ -46,7 +46,7 @@ public class Define implements CommandExecutor {
                 } catch (NoSuchKingdomException | NullPointerException e) {
                     Bukkit.getLogger().warning(args[0] + " bestaat niet! Define{54}");
                 }
-                if (player.hasPermission("FireKingdom.staff")){
+                if (player.hasPermission("publickingdom.staff")){
                     if (kingdom != null){
                         kingdom.setRegion(args[1]);
                     }

@@ -16,8 +16,8 @@ public class Help implements CommandExecutor {
         public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args){
             Player player = (Player) sender;
 
-            sender.sendMessage("§8§l§m-----------------§7[ §c§lFire§e§lKingdom§7 ]§8§l§m----------------");
-            sender.sendMessage(ChatColor.GRAY + "/k ally (kingodm) = Maak een kingdom ally");
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("Help-Board-Header")));
+            sender.sendMessage(ChatColor.GRAY + "/k ally (kingdom) = Maak een kingdom ally");
             sender.sendMessage(ChatColor.GRAY + "/k enemy (kingdom) = Maak een kingdom enemy");
             sender.sendMessage(ChatColor.GRAY + "/k info (kingdom/speler) = Krijg info van een speler of kingdom");
             sender.sendMessage(ChatColor.GRAY + "/k spawn = Ga naar je kingdom spawn");
@@ -30,19 +30,20 @@ public class Help implements CommandExecutor {
             sender.sendMessage(ChatColor.GRAY + "/k toggleboard = toggled het scoreboard");
             sender.sendMessage(ChatColor.GRAY + "/k hertogdom = Ga naar je hertogdom mits je deze hebt!");
             sender.sendMessage(ChatColor.GRAY + "/k sethertogdomspawn = Zet de spawn van je hertogdom mits je deze hebt!");
-            if (player.hasPermission("firekingdom.home")){
+            if (player.hasPermission("publickingdom.home")){
                 sender.sendMessage(ChatColor.GRAY + "/k sethome <naam< = zet een home (kan alleen in je eigen border!)");
                 sender.sendMessage(ChatColor.GRAY + "/k home = Ga naar je geplaatste home!");
                 sender.sendMessage(ChatColor.GRAY + "/k removehome <naam> = Verwijder de home <naam>!");
                 sender.sendMessage(ChatColor.GRAY + "/k listhomes = Lijst van huidige homes!");
             }
-            if (player.hasPermission("PublicKingdom.staff")) {
+            if (player.hasPermission("publickingdom.staff")) {
                 sender.sendMessage(ChatColor.GRAY + "/k set (speler) (kingdom) = Zet een speler in een kingdom");
                 sender.sendMessage(ChatColor.GRAY + "/k define (kingdom) = Stel de region van een kingdom in, LET OP: Je moet in de region staan!");
                 sender.sendMessage(ChatColor.GRAY + "/k clean = leeg een heel kingdom!");
                 sender.sendMessage(ChatColor.GRAY + "/k hertogdomdefine (kingdom) = Stel de region van het hertogdom <kingdom> in!");
                 sender.sendMessage(ChatColor.GRAY + "/k rename (Kingdom) (Nieuwe kingdom naam)");
             }
+            sender.sendMessage(ChatColor.GOLD + "This Plugin was made by JanSneeuw");
             sender.sendMessage("§8§l§m--------------------------------------------");
             return true;
         }

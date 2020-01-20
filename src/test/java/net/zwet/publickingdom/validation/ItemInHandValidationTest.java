@@ -14,7 +14,7 @@ public class ItemInHandValidationTest {
     @Test
     public void testIsValidSucceed() {
         Player player = mock(Player.class);
-        ItemStack material = new ItemStack(Material.GOLD_SWORD);
+        ItemStack material = new ItemStack(Material.GOLDEN_SWORD);
         when(player.getItemInHand()).thenReturn(material);
         ItemInHandValidation itemInHandValidation = new ItemInHandValidation(player);
         assertEquals(true, itemInHandValidation.isValid());
@@ -26,7 +26,7 @@ public class ItemInHandValidationTest {
     public void testIsValidFail(){
 
         Player player = mock(Player.class);
-        ItemStack material = new ItemStack(Material.GOLD_SWORD);
+        ItemStack material = new ItemStack(Material.GOLDEN_SWORD);
         when(player.getItemInHand()).thenReturn(null);
         ItemInHandValidation itemInHandValidation = new ItemInHandValidation(player);
         assertEquals(false, itemInHandValidation.isValid());

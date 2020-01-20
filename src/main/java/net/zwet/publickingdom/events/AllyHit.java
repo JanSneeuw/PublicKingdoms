@@ -42,7 +42,7 @@ public class AllyHit implements Listener {
                 Playerdata damagerdata = new Playerdata(damager);
                 Playerdata damageddata = new Playerdata(damaged);
                 Kingdom kingdom = new Kingdom(damager);
-                String fireprefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
+                String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("Message-Prefix").toString());
                 if (damagerdata.isInKingdom() && damageddata.isInKingdom()){
                     Kingdom dkingdom = new Kingdom(damaged);
                     if (kingdom.isAllyWith(dkingdom)){

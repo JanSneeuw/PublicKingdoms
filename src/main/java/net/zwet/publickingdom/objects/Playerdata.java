@@ -89,7 +89,7 @@ public class Playerdata {
 
     public ItemStack getKingdomItem(){
         List<String> kingdomlore = new ArrayList<>();
-        ItemStack kingdom = new ItemStack(Material.GOLD_SWORD);
+        ItemStack kingdom = new ItemStack(Material.GOLDEN_SWORD);
         ItemMeta kingdommeta = kingdom.getItemMeta();
         kingdommeta.setDisplayName(ChatColor.GRAY + "Kingdom: ");
         if (isInKingdom()) {
@@ -114,7 +114,7 @@ public class Playerdata {
     }
     public ItemStack getRankItem(){
         List<String> ranklore = new ArrayList<>();
-        ItemStack rank = new ItemStack(Material.WORKBENCH);
+        ItemStack rank = new ItemStack(Material.CRAFTING_TABLE);
         ItemMeta rankmeta = rank.getItemMeta();
         rankmeta.setDisplayName(ChatColor.GRAY + "Rank: ");
         if (isInKingdom()){

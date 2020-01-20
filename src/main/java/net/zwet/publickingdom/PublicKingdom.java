@@ -1,12 +1,7 @@
 package net.zwet.publickingdom;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_13_R2.IChatBaseComponent;
+import net.minecraft.server.v1_13_R2.PacketPlayOutChat;
 import net.zwet.publickingdom.events.*;
 import net.zwet.publickingdom.tabcompletions.CommandCompletion;
 import org.bukkit.Bukkit;
@@ -14,20 +9,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.*;
 import java.util.logging.Level;
 
 public final class PublicKingdom extends JavaPlugin {
-    public static MongoClient Client;
-    public static MongoCollection<BasicDBObject> Players;
-    public static MongoCollection<BasicDBObject> Kingdoms;
-    public static MongoDatabase Database;
+
     public String kingdomloos = this.getConfig().getString("Kingdomloos");
     @Override
     public void onEnable() {
@@ -44,22 +35,7 @@ public final class PublicKingdom extends JavaPlugin {
         saveDefaultTargaryen();
         getLogger().info("PublicKingdom gestart!");
 
-        if (getConfig().getString("Database.Enabled").equalsIgnoreCase("TRUE")){
-            if (getConfig().getString("Datebase.Type").equalsIgnoreCase("MongoDB")){
-                if (getConfig().getString("MongoDB.Sort").equalsIgnoreCase("CLOUD")){
-                    MongoClientURI clientURI = new MongoClientURI(getConfig().getString("MongoDB.URL"));
-                    Client = new MongoClient(clientURI);
-                    Database = Client.getDatabase(getConfig().getString("MongoDB.NAME"));
-                    Players = Database.getCollection("playerdata", BasicDBObject.class);
-                    Kingdoms = Database.getCollection("kingdoms", BasicDBObject.class);
-                }else if (getConfig().getString("MongoDB.Sort").equalsIgnoreCase("LOCAL")){
-                    Client = new MongoClient(getConfig().getString("MongoDB.IP"), getConfig().getInt("DatabaseType.PORT"));
-                    Database = Client.getDatabase("MongoDB.NAME");
-                    Players = Database.getCollection("playerdata", BasicDBObject.class);
-                    Kingdoms = Database.getCollection("kingdoms", BasicDBObject.class);
-                }
-            }
-        }else{
+
             File playersdir = new File(getDataFolder() + File.separator + "players");
             if (!playersdir.exists()) {
                 playersdir.mkdir();
@@ -67,18 +43,10 @@ public final class PublicKingdom extends JavaPlugin {
             File kingdomsdir = new File(getDataFolder() + File.separator + "kingdoms");
             if (!kingdomsdir.exists()) {
                 kingdomsdir.mkdir();
-            }
+
         }
 
-        new BukkitRunnable(){
-            public void run(){
-                if (Bukkit.getOnlinePlayers().size() > 0){
-                    for (Player player : Bukkit.getOnlinePlayers()){
-                        net.zwet.publickingdom.methods.hotbar.remakeHotbar(player);
-                    }
-                }
-            }
-        }.runTaskTimer(this, 0, 5);
+
     }
 
     @Override
@@ -115,7 +83,7 @@ public final class PublicKingdom extends JavaPlugin {
     {
         CraftPlayer cp = (CraftPlayer)p;
         IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + ChatColor.translateAlternateColorCodes('&', message) + "\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte)2);
+        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc);
         cp.getHandle().playerConnection.sendPacket(ppoc);
     }
 
